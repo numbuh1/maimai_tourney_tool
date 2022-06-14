@@ -1,0 +1,40 @@
+.chart-thumbnail {
+	border-style: ridge;
+ 	border-width: 10px;
+}
+
+.chart-basic {
+ 	border-color: limegreen;
+}
+.chart-advanced {
+ 	border-color: yellow;
+}
+.chart-expert {
+ 	border-color: red;
+}
+.chart-master {
+ 	border-color: mediumpurple;
+}
+.chart-remaster {
+ 	border-color: violet;
+}
+
+.music_kind_icon {
+	position: absolute;
+    top: -5px;
+    left: -5px;
+    height: 20px;
+}
+
+.music_lv_back {
+    width: 45px;
+    height: 43px;
+    padding: 15px 0 0 0;
+    background: url(https://maimaidx-eng.com/maimai-mobile/img/back_music_level.png);
+    border-radius: 5px;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+}
+
+/*# sourceMappingURL=app.css.map*/
