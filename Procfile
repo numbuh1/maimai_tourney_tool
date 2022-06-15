@@ -2,4 +2,3 @@ web: php artisan cache:clear && php artisan config:cache && php artisan route:ca
 web: mkdir storage/framework/cache
 web: mkdir storage/framework/views
 web: mkdir storage/framework/session
-web: composer install
