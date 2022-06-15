@@ -1,1 +1,1 @@
-web: php artisan config:cache && php artisan route:cache && $(composer config bin-dir)/heroku-php-apache2 public/
+web: php artisan cache:clear && php artisan config:cache && php artisan route:cache && $(composer config bin-dir)/heroku-php-apache2 public/
