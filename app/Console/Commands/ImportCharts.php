@@ -39,7 +39,7 @@ class ImportCharts extends Command
      */
     public function handle()
     {
-        $filename = database_path() . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'data.json';
+        $filename = database_path() . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'data-uni.json';
 
         $json = File::get($filename);
         $data = json_decode($json);

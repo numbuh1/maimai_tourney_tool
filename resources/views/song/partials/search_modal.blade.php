@@ -1,5 +1,5 @@
 <!-- Select Modal-->
-<div class="modal fade" id="selectSongModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="selectSongModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 1000px">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 col-12">
                         <label>Category</label>
                         <select id="selectCategory" class="form-control select2" multiple>
                             @foreach(config('game.categories') as $category)
@@ -18,7 +18,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 col-6">
                         <label>Version</label>
                         <select id="selectVersion" class="form-control select2" multiple>
                             @foreach(config('game.versions') as $version)
@@ -26,7 +26,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 col-6">
                         <label>Difficulty</label>
                         <select id="selectDiff" class="form-control select2" multiple>
                             @foreach(config('game.difficulties') as $key => $diff)
@@ -34,7 +34,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3 col-6">
                         <label>Level Min</label>
                         <input type="number" id="selectLevelMin" class="form-control">
                         <!-- <select id="selectLevelMin" class="form-control">
@@ -44,7 +44,7 @@
                             @endforeach
                         </select> -->
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3 col-6">
                         <label>Level Max</label>
                         <input type="number" id="selectLevelMax" class="form-control">
                         <!-- <select id="selectLevelMax" class="form-control">
@@ -54,15 +54,23 @@
                             @endforeach
                         </select> -->
                     </div>
+                    <div class="form-group col-md-6 col-6">
+                        <label>Person Picking</label>
+                        <select id="selectMapPoolItemType" class="form-control">
+                            <option value="Player 1">Player 1</option>
+                            <option value="Player 2">Player 2</option>
+                            <option value="Random">Random</option>
+                        </select>
+                    </div>                    
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 col-12">
                         <a id="btnShowSongs" href="#" class="btn btn-info col-md-12" data-action="{{ route('song.search', false) }}">Show All</a>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-4 col-6">
                         <a id="btnRandomSongs" href="#" class="btn btn-warning col-md-12" data-action="{{ route('song.random', false) }}">Random</a>
                     </div>                    
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-2 col-6">
                         <div class="input-group">
                             <input type="number" id="selectRandomNumber" class="form-control">
                             <div class="input-group-append">

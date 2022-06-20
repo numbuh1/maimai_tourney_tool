@@ -1,4 +1,4 @@
-<div id="songFilter" class="d-flex justify-content-start mb-2">
+<!-- <div id="songFilter" class="d-flex justify-content-start mb-2">
     <select id="selectCategory" class="mr-2" >
         <option value="All" >All Categories</option>
         @foreach ($categories as $key => $category)
@@ -11,7 +11,7 @@
             <option value="{{$key}}">{{$version}}</option>
         @endforeach
     </select>
-</div>
+</div> -->
 <div class="table-responsive">
     <table class="table table-bordered" id="song-table" data-url="{{ $song_list_url }}" width="100%" cellspacing="0">
         <thead>

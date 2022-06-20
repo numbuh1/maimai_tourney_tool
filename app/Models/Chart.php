@@ -24,11 +24,13 @@ class Chart extends Model
     	$banned = $input['banned'] ?? [];
 
     	$query = Song::select(
+                    'charts.internalLevel',
     				'songs.id',
     				'songs.imageName',
     				'charts.type',
     				'charts.difficulty',
-    				'charts.level'
+    				'charts.level',
+    				'charts.id as chart_id',
     			)
     			->leftJoin('charts', 'charts.song_id', 'songs.id')
     			->whereNotNull('charts.level');
@@ -42,11 +44,17 @@ class Chart extends Model
     	if($difficulty) {
     		$query->whereIn('charts.difficulty', $difficulty);
     	}
-    	if($levelMin) {
-    		$query->where('internalLevel', '>=', $levelMin);
-    	}
-    	if($levelMax) {
-    		$query->where('internalLevel', '<=', $levelMax);
+    	if($levelMin != $levelMax) {
+    		if($levelMin) {
+	    		$query->where('internalLevel', '>=', $levelMin - 0.001);
+	    	}
+	    	if($levelMax) {
+	    		$query->where('internalLevel', '<=', $levelMax + 0.001);
+	    	}	
+    	} else {
+    		if($levelMin && $levelMax) {
+    			$query->whereRaw('abs(internalLevel - ' . $levelMin .') < 0.001');
+    		}
     	}
     	if($banned) {
     		$query->whereNotIn('charts.id', $banned);

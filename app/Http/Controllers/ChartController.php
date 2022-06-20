@@ -21,4 +21,18 @@ class ChartController extends Controller
     	
     	return view('chart.detail', $data);
     }
+
+    // Show chart detail
+    public function detail($chartId)
+    {
+        $chart = Chart::find($chartId);
+        $song = Song::find($chart->song_id);
+
+        $data = [
+            'chart' => $chart,
+            'song' => $song
+        ];
+        
+        return json_encode($data);
+    }
 }

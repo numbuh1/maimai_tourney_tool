@@ -7,8 +7,7 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production",
-        "heroku-postbuild": "npm run prod"
+        "production": "mix --production"
     },
     "devDependencies": {
         "axios": "^0.21",
@@ -23,11 +22,6 @@
         "jquery": "3.5.1",
         "jquery.easing": "^1.4.1",
         "popper.js": "^1.16.1",
-        "select2": "^4.1.0-rc.0",
-        "laravel-mix": "^6.0.6"
-    },
-    "engines": {
-        "node": ">= 6.9.4",
-        "npm": ">= 4.4.0"
+        "select2": "^4.1.0-rc.0"
     }
 }

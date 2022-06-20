@@ -237,10 +237,10 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
+        // [
+        //     'type' => 'sidebar-menu-search',
+        //     'text' => 'search',
+        // ],
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
@@ -248,8 +248,8 @@ return [
         ],
         ['header' => 'Tourney Settings'],
         [
-            'text' => 'Song Picker',
-            'url'  => 'song-picker',
+            'text' => 'Map Pools',
+            'url'  => 'pools',
             'icon' => 'fas fa-fw fa-file',
         ],
         ['header' => 'Config Settings'],

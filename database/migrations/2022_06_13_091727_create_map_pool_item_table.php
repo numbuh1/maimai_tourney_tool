@@ -15,9 +15,13 @@ class CreateMapPoolItemTable extends Migration
     {
         Schema::create('map_pool_items', function (Blueprint $table) {
             $table->id();
+            $table->integer('map_pool_id')->nullable();
             $table->integer('song_id')->nullable();
-            $table->integer('type')->nullable();
+            $table->integer('chart_id')->nullable();
+            $table->string('type')->nullable();
             $table->integer('is_banned')->nullable();
+            $table->integer('is_selected')->nullable();
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }

@@ -1,0 +1,1291 @@
+{
+	"songs": [		
+		{
+			"songId": "ヨミビトシラズ",
+			"category": "maimai",
+			"title": "ヨミビトシラズ",
+			"artist": "Limonène (サノカモメ+月島春果)",
+			"imageName": "11e5b7df66aa5b162f073333896cf141b031947777293f9048d66753dfaaf175.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22013,
+			"isNew": false,
+			"isLocked": true,
+			"bpm": 188,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "4",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 176,
+						"hold": 5,
+						"slide": 11,
+						"touch": 17,
+						"break": 1,
+						"total": 210
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 4
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "7+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 249,
+						"hold": 15,
+						"slide": 26,
+						"touch": 32,
+						"break": 3,
+						"total": 325
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 7.5
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "12",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 533,
+						"hold": 37,
+						"slide": 42,
+						"touch": 35,
+						"break": 5,
+						"total": 652
+					},
+					"noteDesigner": "はっぴー",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 12
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "13+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 751,
+						"hold": 50,
+						"slide": 80,
+						"touch": 36,
+						"break": 4,
+						"total": 921
+					},
+					"noteDesigner": "Jack",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 13.5
+				}
+			]
+		},
+		{
+			"songId": "前衛的Landscape",
+			"category": "maimai",
+			"title": "前衛的Landscape",
+			"artist": "HiTECH NINJA feat. RANASOL",
+			"imageName": "5ba16f0773239c0717f23e1fb863cf3c96616af72661ebdbe537c6ea27438435.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22013,
+			"isNew": false,
+			"isLocked": true,
+			"bpm": 153,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "4",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 123,
+						"hold": 8,
+						"slide": 4,
+						"touch": 11,
+						"break": 3,
+						"total": 149
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 4
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "8",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 254,
+						"hold": 17,
+						"slide": 14,
+						"touch": 9,
+						"break": 6,
+						"total": 300
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 8
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "11",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 318,
+						"hold": 46,
+						"slide": 53,
+						"touch": 21,
+						"break": 17,
+						"total": 455
+					},
+					"noteDesigner": "翠楼屋",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 11
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "13+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 566,
+						"hold": 33,
+						"slide": 107,
+						"touch": 38,
+						"break": 11,
+						"total": 755
+					},
+					"noteDesigner": "シチミヘルツ",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 13.5
+				}
+			]
+		},
+		{
+			"songId": "Trick tear",
+			"category": "maimai",
+			"title": "Trick tear",
+			"artist": "しーけー",
+			"imageName": "70b83fc113aa3f30894a0febc529995fa56f63e493f93ad0055bd1efb3bb787e.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22013,
+			"isNew": false,
+			"isLocked": true,
+			"bpm": 222,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "5",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 166,
+						"hold": 13,
+						"slide": 3,
+						"touch": 23,
+						"break": 6,
+						"total": 211
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 5
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "8+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 324,
+						"hold": 28,
+						"slide": 15,
+						"touch": 31,
+						"break": 24,
+						"total": 422
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 8.5
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "12",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 361,
+						"hold": 94,
+						"slide": 58,
+						"touch": 45,
+						"break": 51,
+						"total": 609
+					},
+					"noteDesigner": "はっぴー",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 12
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "14",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 518,
+						"hold": 75,
+						"slide": 116,
+						"touch": 90,
+						"break": 41,
+						"total": 840
+					},
+					"noteDesigner": "翠楼屋",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 14
+				}
+			]
+		},
+		{
+			"songId": "躯樹の墓守",
+			"category": "maimai",
+			"title": "躯樹の墓守",
+			"artist": "隣の庭は青い(庭師+Aoi)",
+			"imageName": "cfccaaead0eb345bdf04e6f38736544b1b2e923a9838c72a297c1720429e059c.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22013,
+			"isNew": false,
+			"isLocked": true,
+			"bpm": 211,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "6",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 214,
+						"hold": 16,
+						"slide": 6,
+						"touch": 10,
+						"break": 6,
+						"total": 252
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 6
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "9+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 404,
+						"hold": 24,
+						"slide": 26,
+						"touch": 10,
+						"break": 7,
+						"total": 471
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 9.5
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "12+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 523,
+						"hold": 71,
+						"slide": 58,
+						"touch": 59,
+						"break": 10,
+						"total": 721
+					},
+					"noteDesigner": "はっぴー",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 12.5
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "14+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 761,
+						"hold": 80,
+						"slide": 116,
+						"touch": 24,
+						"break": 57,
+						"total": 1038
+					},
+					"noteDesigner": "超七味星人",
+					"regions": {
+						"jp": true,
+						"intl": true,
+						"cn": false
+					},
+					"levelValue": 14.5
+				}
+			]
+		},
+		{
+			"songId": "春嵐",
+			"category": "niconico＆ボーカロイド",
+			"title": "春嵐",
+			"artist": "john",
+			"imageName": "da4afc21aac928285710a128231eb225ac2a6372d247dcc60c81860f50558435.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22014,
+			"isNew": false,
+			"isLocked": false,
+			"bpm": 140,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "3",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 99,
+						"hold": 3,
+						"slide": 2,
+						"touch": 8,
+						"break": 4,
+						"total": 116
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 3
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "6",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 209,
+						"hold": 13,
+						"slide": 4,
+						"touch": 19,
+						"break": 12,
+						"total": 257
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 6
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "10",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 229,
+						"hold": 83,
+						"slide": 56,
+						"touch": 43,
+						"break": 22,
+						"total": 433
+					},
+					"noteDesigner": "隅田川星人",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 10
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "13+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 522,
+						"hold": 48,
+						"slide": 81,
+						"touch": 13,
+						"break": 4,
+						"total": 668
+					},
+					"noteDesigner": "はっぴー",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 13.5
+				}
+			]
+		},
+		{
+			"songId": "ラグトレイン",
+			"category": "niconico＆ボーカロイド",
+			"title": "ラグトレイン",
+			"artist": "稲葉曇",
+			"imageName": "563698fbc4f01aa986477d56e3a5cbb2a6830ec1377c371bc7d1834615171f34.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22014,
+			"isNew": false,
+			"isLocked": false,
+			"bpm": 147,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "2",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 105,
+						"hold": 16,
+						"slide": 4,
+						"touch": 9,
+						"break": 3,
+						"total": 137
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 2
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "6",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 249,
+						"hold": 22,
+						"slide": 14,
+						"touch": 16,
+						"break": 6,
+						"total": 307
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 6
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "9+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 438,
+						"hold": 64,
+						"slide": 19,
+						"touch": 5,
+						"break": 10,
+						"total": 536
+					},
+					"noteDesigner": "Jack",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 9.5
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "12+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 551,
+						"hold": 84,
+						"slide": 96,
+						"touch": 30,
+						"break": 11,
+						"total": 772
+					},
+					"noteDesigner": "はっぴー",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 12.5
+				}
+			]
+		},
+		{
+			"songId": "アカツキアライヴァル",
+			"category": "niconico＆ボーカロイド",
+			"title": "アカツキアライヴァル",
+			"artist": "Last Note.",
+			"imageName": "7aa766dce28d28fbd9c3135d422bc423b28e6c0afaf787a6503fe88334572570.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22014,
+			"isNew": false,
+			"isLocked": false,
+			"bpm": 125,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "2",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 106,
+						"hold": 4,
+						"slide": 3,
+						"touch": 9,
+						"break": 4,
+						"total": 126
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 2
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "6",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 198,
+						"hold": 30,
+						"slide": 22,
+						"touch": 23,
+						"break": 7,
+						"total": 280
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 6
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "10",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 429,
+						"hold": 28,
+						"slide": 53,
+						"touch": 7,
+						"break": 5,
+						"total": 522
+					},
+					"noteDesigner": "はっぴー",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 10
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "13",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 577,
+						"hold": 68,
+						"slide": 61,
+						"touch": 73,
+						"break": 7,
+						"total": 786
+					},
+					"noteDesigner": "ロシェ＠ペンギン",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 13
+				}
+			]
+		},
+		{
+			"songId": "リモコン",
+			"category": "niconico＆ボーカロイド",
+			"title": "リモコン",
+			"artist": "じーざす（ワンダフル☆オポチュニティ！）",
+			"imageName": "cb7539727a9692f4ff136e31dd489e629c8a3d21de098724434a5221eecfdef7.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22014,
+			"isNew": false,
+			"isLocked": false,
+			"bpm": 165,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "3",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 105,
+						"hold": 16,
+						"slide": 3,
+						"touch": 8,
+						"break": 6,
+						"total": 138
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 3
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "6",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 242,
+						"hold": 19,
+						"slide": 11,
+						"touch": 52,
+						"break": 18,
+						"total": 342
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 6
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "9",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 408,
+						"hold": 83,
+						"slide": 13,
+						"touch": 13,
+						"break": 36,
+						"total": 553
+					},
+					"noteDesigner": "翠楼屋",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 9
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "13",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 513,
+						"hold": 95,
+						"slide": 106,
+						"touch": 84,
+						"break": 30,
+						"total": 828
+					},
+					"noteDesigner": "隅田川星人",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 13
+				}
+			]
+		},
+		{
+			"songId": "on the rocks",
+			"category": "niconico＆ボーカロイド",
+			"title": "on the rocks",
+			"artist": "OSTER project",
+			"imageName": "4efbb6a789b8c9c883efb1ef9b8a95a264c7b6edd0559db41513df3b84256f8d.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22014,
+			"isNew": false,
+			"isLocked": false,
+			"bpm": 150,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "1",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 70,
+						"hold": 13,
+						"slide": 2,
+						"touch": 7,
+						"break": 2,
+						"total": 94
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 1
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "6",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 197,
+						"hold": 20,
+						"slide": 14,
+						"touch": 26,
+						"break": 2,
+						"total": 259
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 6
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "8+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 330,
+						"hold": 49,
+						"slide": 21,
+						"touch": 10,
+						"break": 10,
+						"total": 420
+					},
+					"noteDesigner": "はっぴー",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 8.5
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "12+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 549,
+						"hold": 17,
+						"slide": 76,
+						"touch": 27,
+						"break": 3,
+						"total": 672
+					},
+					"noteDesigner": "Jack",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 12.5
+				}
+			]
+		},
+		{
+			"songId": "We Are Us",
+			"category": "オンゲキ＆CHUNITHM",
+			"title": "We Are Us",
+			"artist": "舞ヶ原シンセ研究会",
+			"imageName": "9d9c90b13a4f07f108213eef81ccd29fe9badce1fc9041b5ef448670cbebe6b8.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22015,
+			"isNew": false,
+			"isLocked": false,
+			"bpm": 145,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "3",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 101,
+						"hold": 10,
+						"slide": 3,
+						"touch": 22,
+						"break": 2,
+						"total": 138
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 3
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "6",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 169,
+						"hold": 28,
+						"slide": 14,
+						"touch": 33,
+						"break": 3,
+						"total": 247
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 6
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "10",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 293,
+						"hold": 73,
+						"slide": 22,
+						"touch": 14,
+						"break": 11,
+						"total": 413
+					},
+					"noteDesigner": "翠楼屋",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 10
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "13",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 649,
+						"hold": 15,
+						"slide": 80,
+						"touch": 61,
+						"break": 28,
+						"total": 833
+					},
+					"noteDesigner": "シチミヘルツ",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 13
+				}
+			]
+		},
+		{
+			"songId": "Limits",
+			"category": "オンゲキ＆CHUNITHM",
+			"title": "Limits",
+			"artist": "舞ヶ原シンセ研究会",
+			"imageName": "8562861b4aaab1b503f4ee422d3bb02ba4282bdf87bb674b42faa33a717fc1a4.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22015,
+			"isNew": false,
+			"isLocked": false,
+			"bpm": 140,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "3",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 135,
+						"hold": 22,
+						"slide": 6,
+						"touch": 20,
+						"break": 1,
+						"total": 184
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 3
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "6",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 243,
+						"hold": 15,
+						"slide": 26,
+						"touch": 24,
+						"break": 6,
+						"total": 314
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 6
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "10",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 321,
+						"hold": 53,
+						"slide": 59,
+						"touch": 29,
+						"break": 14,
+						"total": 476
+					},
+					"noteDesigner": "翠楼屋",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 10
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "13+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 455,
+						"hold": 108,
+						"slide": 144,
+						"touch": 59,
+						"break": 20,
+						"total": 786
+					},
+					"noteDesigner": "ロシアンブラック",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 13.5
+				}
+			]
+		},
+		{
+			"songId": "スピカの天秤",
+			"category": "オンゲキ＆CHUNITHM",
+			"title": "スピカの天秤",
+			"artist": "Acotto",
+			"imageName": "1d56b7818aa2efc495b1757c9e19133ab2ae5b4e936786cfeebbf729dabef79e.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22015,
+			"isNew": false,
+			"isLocked": false,
+			"bpm": 252,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "5",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": null,
+						"hold": null,
+						"slide": null,
+						"touch": null,
+						"break": null,
+						"total": 208
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 5
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "8+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": null,
+						"hold": null,
+						"slide": null,
+						"touch": null,
+						"break": null,
+						"total": 378
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 8.5
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "12+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 574,
+						"hold": 50,
+						"slide": 23,
+						"touch": 89,
+						"break": 11,
+						"total": 747
+					},
+					"noteDesigner": "はっぴー",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 12.5
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "14",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 768,
+						"hold": 62,
+						"slide": 87,
+						"touch": 61,
+						"break": 33,
+						"total": 1011
+					},
+					"noteDesigner": "翠楼屋",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 14
+				}
+			]
+		},
+		{
+			"songId": "ハードコア・シンドローム",
+			"category": "オンゲキ＆CHUNITHM",
+			"title": "ハードコア・シンドローム",
+			"artist": "t+pazolite (HARDCORE TANO*C) feat.TANO*C ALL STARS",
+			"imageName": "c8500bbd109efb2e070d8636e73493b744d81671fa27c268aec883e70f158b83.png",
+			"version": "UNiVERSE",
+			"releaseDate": null,
+			"sortOrder": 22015,
+			"isNew": false,
+			"isLocked": false,
+			"bpm": 190,
+			"sheets": [
+				{
+					"type": "dx",
+					"difficulty": "basic",
+					"level": "5",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 169,
+						"hold": 22,
+						"slide": 4,
+						"touch": 22,
+						"break": 15,
+						"total": 232
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 5
+				},
+				{
+					"type": "dx",
+					"difficulty": "advanced",
+					"level": "8",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 296,
+						"hold": 25,
+						"slide": 14,
+						"touch": 31,
+						"break": 9,
+						"total": 375
+					},
+					"noteDesigner": "-",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 8
+				},
+				{
+					"type": "dx",
+					"difficulty": "expert",
+					"level": "12+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 455,
+						"hold": 122,
+						"slide": 60,
+						"touch": 51,
+						"break": 41,
+						"total": 729
+					},
+					"noteDesigner": "Jack",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 12.5
+				},
+				{
+					"type": "dx",
+					"difficulty": "master",
+					"level": "13+",
+					"version": "UNiVERSE",
+					"noteCounts": {
+						"tap": 735,
+						"hold": 52,
+						"slide": 86,
+						"touch": 184,
+						"break": 39,
+						"total": 1096
+					},
+					"noteDesigner": "はっぴー",
+					"regions": {
+						"jp": true,
+						"intl": false,
+						"cn": false
+					},
+					"levelValue": 13.5
+				}
+			]
+		}
+	]
+}
