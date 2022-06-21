@@ -249,3 +249,10 @@ $(document).on('click', '#btnRoulette', function(event) {
     }
     $('div.roulette').roulette(option);
 });
+
+$('body').on('hidden.bs.modal', function () {
+    if($('.modal.in').length > 0)
+    {
+        $('body').addClass('modal-open');
+    }
+});

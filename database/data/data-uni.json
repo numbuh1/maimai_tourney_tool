@@ -425,7 +425,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 3
@@ -446,7 +446,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 6
@@ -467,7 +467,7 @@
 					"noteDesigner": "隅田川星人",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 10
@@ -488,7 +488,7 @@
 					"noteDesigner": "はっぴー",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 13.5
@@ -524,7 +524,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 2
@@ -545,7 +545,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 6
@@ -566,7 +566,7 @@
 					"noteDesigner": "Jack",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 9.5
@@ -587,7 +587,7 @@
 					"noteDesigner": "はっぴー",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 12.5
@@ -623,7 +623,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 2
@@ -644,7 +644,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 6
@@ -665,7 +665,7 @@
 					"noteDesigner": "はっぴー",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 10
@@ -686,7 +686,7 @@
 					"noteDesigner": "ロシェ＠ペンギン",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 13
@@ -722,7 +722,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 3
@@ -743,7 +743,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 6
@@ -764,7 +764,7 @@
 					"noteDesigner": "翠楼屋",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 9
@@ -785,7 +785,7 @@
 					"noteDesigner": "隅田川星人",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 13
@@ -821,7 +821,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 1
@@ -842,7 +842,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 6
@@ -863,7 +863,7 @@
 					"noteDesigner": "はっぴー",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 8.5
@@ -884,7 +884,7 @@
 					"noteDesigner": "Jack",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 12.5
@@ -920,7 +920,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 3
@@ -941,7 +941,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 6
@@ -962,7 +962,7 @@
 					"noteDesigner": "翠楼屋",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 10
@@ -983,7 +983,7 @@
 					"noteDesigner": "シチミヘルツ",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 13
@@ -1019,7 +1019,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 3
@@ -1040,7 +1040,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 6
@@ -1061,7 +1061,7 @@
 					"noteDesigner": "翠楼屋",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 10
@@ -1082,7 +1082,7 @@
 					"noteDesigner": "ロシアンブラック",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 13.5
@@ -1118,7 +1118,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 5
@@ -1139,7 +1139,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 8.5
@@ -1160,7 +1160,7 @@
 					"noteDesigner": "はっぴー",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 12.5
@@ -1181,7 +1181,7 @@
 					"noteDesigner": "翠楼屋",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 14
@@ -1217,7 +1217,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 5
@@ -1238,7 +1238,7 @@
 					"noteDesigner": "-",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 8
@@ -1259,7 +1259,7 @@
 					"noteDesigner": "Jack",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 12.5
@@ -1280,7 +1280,7 @@
 					"noteDesigner": "はっぴー",
 					"regions": {
 						"jp": true,
-						"intl": false,
+						"intl": true,
 						"cn": false
 					},
 					"levelValue": 13.5

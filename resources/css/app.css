@@ -36,3 +36,7 @@
     bottom: -5px;
     right: -5px;
 }
+
+.modal {
+  overflow-y:auto;
+}

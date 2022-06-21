@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Song;
+use App\Models\Chart;
 use File;
 
 class ImportCharts extends Command
@@ -81,7 +82,8 @@ class ImportCharts extends Command
                     $currChart->level           = $chart->level;
                     $currChart->version         = $chart->version ?? '';
                     $currChart->noteDesigner    = $chart->noteDesigner;
-                    $currChart->internalLevel   = $chart->internalLevel;
+                    $currChart->internalLevel   = $chart->internalLevel ?? str_replace('+', '.7', $chart->level);
+                    $currChart->level_value     = str_replace('+', '.5', $chart->level);
                     $currChart->save();
                 }
             }

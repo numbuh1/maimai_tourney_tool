@@ -11,7 +11,7 @@ class MapPoolItem extends Model
 {
     use HasFactory;
 
-    public function list(Request $request)
+    public static function list(Request $request)
     {
         $columns = array(
             0 => 'order',
