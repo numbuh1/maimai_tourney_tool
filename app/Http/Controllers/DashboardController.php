@@ -191,7 +191,8 @@ class DashboardController extends Controller
                         ->pluck('songs.id');
         $song_names = Song::pluck('title', 'id');
     
-        $layout = 'stream-layout.png';
+        //$layout = 'stream-layout.png';
+        $layout = 'test-background.png';
         $layout = imagecreatefrompng($layout);
         
         imagealphablending($layout, true);
@@ -202,8 +203,13 @@ class DashboardController extends Controller
         // imagecopy($layout, $song_1, 300, 800, 0, 0, 190, 190);
         $x = 100;
         $song_data = [];
+        $select1 = 0;
+        $ban1 = 1;
+        $ban2 = 2;
         for ($i=0; $i < 5; $i++) { 
             while(true) {
+                $select = 0;
+                $lock = 0;
                 $chart = Chart::join('songs','charts.song_id','songs.id')
                             ->whereIn('difficulty', ['expert', 'master', 'remaster'])
                             ->whereNotNull('songs.sega_song_id')
@@ -211,7 +217,9 @@ class DashboardController extends Controller
                             ->inRandomOrder()->first();
                 $song = Song::find($chart->song_id) ?? null;
                 if(!$song) continue;
-                $this->addImage($layout, $song, $chart, $x, 700, $song->title);
+                if($i == $select1) $select = 1;
+                if($i == $ban1 || $i == $ban2) $lock = 1;
+                $this->addImage($layout, $song, $chart, $x, 650, $song->short_name ?? $song->title, $lock, $select);
                 break;
             }
             $song_data[] = $chart->song_id;
@@ -225,7 +233,7 @@ class DashboardController extends Controller
         return 1;
     }
 
-    public function addImage(&$layout, $song, $chart, $srcX, $srcY, $text) {
+    public function addImage(&$layout, $song, $chart, $srcX, $srcY, $text, $lock, $select) {
         if(strlen($chart->sega_song_id) > 4) {
             $chart->sega_song_id = substr($chart->sega_song_id, 1, 5);
         }
@@ -233,28 +241,99 @@ class DashboardController extends Controller
         //$song_file = 'https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/' . $song->imageName;
         $song_file = 'img/song_image/UI_Jacket_' . $song_sega_id . '_s.png';
         try {
-            $baseImage = imagecreatefrompng('img/song_layout/frame_' . $chart->difficulty . '.png');
-            imagecopy($layout, $baseImage, $srcX, $srcY, 0, 0, 316, 288);
+            if($select) {
+                $selectBgImage = imagecreatefrompng('img/song_layout/select_background.png');
+                imagecopyresized($layout, $selectBgImage, $srcX - 65, $srcY - 90, 0, 0, 450, 450, 896, 896);
 
+                $selectRainbowImage = imagecreatefrompng('img/song_layout/select_rainbow.png');
+                imagecopyresized($layout, $selectRainbowImage, $srcX + 10, $srcY - 65, 0, 0, 294, 96, 512, 128);
+
+                $selectImage = imagecreatefrompng('img/song_layout/select.png');
+                imagecopyresized($layout, $selectImage, $srcX + 50, $srcY - 65, 0, 0, 217, 80, 524, 192);
+            }
+
+            $baseImage = imagecreatefrompng('img/song_layout/frame_' . $chart->difficulty . '.png');
             $songImage = imagecreatefrompng($song_file);
-            imagecopyresized($layout, $songImage, $srcX + 50, $srcY + 37, 0, 0, 217, 217, 200, 200);
-            
             $typeImage = imagecreatefrompng('img/song_layout/type_' . $chart->type . '.png');
+            $levelBaseImage = imagecreatefrompng('img/song_layout/level_base.png');
+            $levelImage = imagecreatefrompng('img/song_layout/level_' . $chart->level . '.png');
+            $titleBaseImage = imagecreatefrompng('img/song_layout/title.png');
+            // $textBgImage = imagecreatefrompng('img/song_layout/text_bg.png');
+            // $textBgImage = imagecreatefrompng('img/song_layout/text_bg_2.png');
+
+            if($lock) {                
+                imagefilter($baseImage, IMG_FILTER_GRAYSCALE);
+                imagefilter($songImage, IMG_FILTER_GRAYSCALE);
+                imagefilter($typeImage, IMG_FILTER_GRAYSCALE);
+                imagefilter($levelBaseImage, IMG_FILTER_GRAYSCALE);
+                imagefilter($levelImage, IMG_FILTER_GRAYSCALE);
+                imagefilter($titleBaseImage, IMG_FILTER_GRAYSCALE);
+            } else {
+                imagefilter($titleBaseImage, IMG_FILTER_BRIGHTNESS, -50);
+            }
+
+            imagecopy($layout, $baseImage, $srcX, $srcY, 0, 0, 316, 288);
+            imagecopyresized($layout, $songImage, $srcX + 50, $srcY + 37, 0, 0, 217, 217, 200, 200);
             imagecopyresized($layout, $typeImage, $srcX, $srcY - 3, 0, 0, 180, 60, 120, 40);
 
-            $levelBaseImage = imagecreatefrompng('img/song_layout/level_base.png');
+            if($lock) {  
+                $cross1Image = imagecreatefrompng('img/song_layout/cross_1.png');
+                imagecopyresized($layout, $cross1Image, $srcX + 35, $srcY + 25, 0, 0, 250, 250, 164, 164);
+
+                $cross2Image = imagecreatefrompng('img/song_layout/cross_2.png');
+                imagecopyresized($layout, $cross2Image, $srcX + 35, $srcY + 25, 0, 0, 250, 250, 164, 164);
+
+                // $lockImage = imagecreatefrompng('img/song_layout/lock.png');
+                // imagecopyresized($layout, $lockImage, $srcX + 108, $srcY + 75, 0, 0, 101, 128, 52, 60);
+
+                $happyImage = imagecreatefrompng('img/song_layout/happy.png');
+                imagecopyresized($layout, $happyImage, $srcX + 70, $srcY + 85, 0, 0, 175, 170, 70, 70);
+
+                // $happyMainImage = imagecreatefrompng('img/song_layout/happy_main.png');
+                // imagecopyresized($layout, $happyMainImage, $srcX + 80, $srcY + 104, 0, 0, 163, 150, 652, 590);
+                
+                // $happyShadowImage = imagecreatefrompng('img/song_layout/happy_shadow.png');
+                // imagecopyresized($layout, $happyShadowImage, $srcX + 80, $srcY + 104, 0, 0, 163, 150, 652, 590);
+
+                // $happyLipImage = imagecreatefrompng('img/song_layout/happy_lip.png');
+                // imagecopyresized($layout, $happyLipImage, $srcX + 147, $srcY + 144, 0, 0, 29, 17, 116, 68);
+
+                // $happyMouthImage = imagecreatefrompng('img/song_layout/happy_mouth.png');
+                // imagecopyresized($layout, $happyMouthImage, $srcX + 153, $srcY + 158, 0, 0, 17, 23, 68, 92);
+
+                // $zannenImage = imagecreatefrompng('img/song_layout/zannen.png');
+                // imagecopyresized($layout, $zannenImage, $srcX + 60, $srcY + 50, 0, 0, 192, 180, 512, 480);
+
+                // $kumaDedImage = imagecreatefrompng('img/song_layout/kuma_ded.png');
+                // imagecopyresized($layout, $kumaDedImage, $srcX + 58, $srcY + 95, 0, 0, 192, 127, 383, 253);
+            }
+
+            if($select) {
+                $select01Image = imagecreatefrompng('img/song_layout/select_01.png');
+                imagecopyresized($layout, $select01Image, $srcX + 240, $srcY + 25, 0, 0, 84, 68, 84, 68);
+
+                $select04Image = imagecreatefrompng('img/song_layout/select_04.png');
+                imagecopyresized($layout, $select04Image, $srcX - 20, $srcY + 65, 0, 0, 112, 72, 112, 72);
+
+                $select05Image = imagecreatefrompng('img/song_layout/select_05.png');
+                imagecopyresized($layout, $select05Image, $srcX + 250, $srcY + 145, 0, 0, 64, 84, 64, 84);
+
+                $select02Image = imagecreatefrompng('img/song_layout/select_02.png');
+                imagecopyresized($layout, $select02Image, $srcX + 20, $srcY + 185, 0, 0, 64, 84, 64, 84);
+
+                // $selectImage = imagecreatefrompng('img/song_layout/select.png');
+                // imagecopyresized($layout, $selectImage, $srcX + 50, $srcY - 65, 0, 0, 217, 80, 524, 192);
+            }
+
             imagecopyresized($layout, $levelBaseImage, $srcX + 180, $srcY + 220, 0, 0, 156, 92, 156, 92);
-
-            $levelImage = imagecreatefrompng('img/song_layout/level_' . $chart->level . '.png');
             imagecopyresized($layout, $levelImage, $srcX + 180, $srcY + 220 - 5, 0, 0, 161, 80, 322, 160);
-
-            $titleBaseImage = imagecreatefrompng('img/song_layout/title.png');
-            imagecopyresized($layout, $titleBaseImage, $srcX, $srcY + 300, 0, 0, 316, 88, 300, 88);            
-
+            imagecopyresized($layout, $titleBaseImage, $srcX, $srcY + 300, 0, 0, 316, 88, 300, 88);
+            //imagecopyresized($layout, $textBgImage, $srcX, $srcY + 300, 0, 0, 316, 88, 168, 64);
+            // imagecopyresized($layout, $textBgImage, $srcX, $srcY + 300, 0, 0, 316, 88, 540, 68);
 
             $white = imagecolorallocate($layout, 255, 255, 255);
             $black = imagecolorallocate($layout, 0, 0, 0);
-            $font = 'YasashisaGothicBold-V2.otf';
+            $font = 'font/nikumaru.otf';
             $size = 15;
 
             //$text = $this->makeTextBlock($text, $font, 20, 190);
