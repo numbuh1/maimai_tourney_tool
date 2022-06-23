@@ -54,11 +54,11 @@ return [
             'ignore_exceptions' => false,
         ],
 
-        'single' => [
-            'driver' => 'errorlog',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => 'debug',
-        ],
+        // 'single' => [
+        //     'driver' => 'errorlog',
+        //     'path' => storage_path('logs/laravel.log'),
+        //     'level' => 'debug',
+        // ],
 
         'daily' => [
             'driver' => 'daily',

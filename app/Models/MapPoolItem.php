@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Player;
 
 class MapPoolItem extends Model
 {
@@ -34,9 +35,19 @@ class MapPoolItem extends Model
         $totalFiltered = $query->count();
         $items = $query->orderBy($order, $dir)->get();
 
+        $players = Player::pluck('name', 'id');
+        $pool_id = null;
+
         $data = array();
         if (!empty($items)) {
             foreach ($items as $item) {
+
+                if(!$pool_id) {
+                    $pool_id = $item->map_pool_id;
+                    $pool = MapPool::find($pool_id);
+                    $player_1 = $players[$pool->player_1] ?? 'Player 1';
+                    $player_2 = $players[$pool->player_2] ?? 'Player 2';
+                }
 
             	if($item->is_banned) {
             		$banButton = '<a href="#" class="btn m-1 btn-danger btn-ban-song" data-id="' . $item->id . '" data-action="' . route('pool.item.ban', ['id' => $item->id, 'ban' => 0]) . '">Unban Song</a>';
@@ -51,6 +62,17 @@ class MapPoolItem extends Model
             	}
 
             	$removeButton = '<a href="#" class="btn m-1 btn-secondary btn-remove-song" data-id="' . $item->id . '" data-action="' . route('pool.item.remove', ['id' => $item->id]) . '">Remove Song</a>';
+
+                switch ($item->item_type) {
+                    case 'Player 1':
+                        $item->item_type = $player_1;
+                        break;
+                    case 'Player 2':
+                        $item->item_type = $player_2;
+                        break;
+                    default:
+                        break;
+                }
 
 
 				$nestedData['order'] = $item->order;

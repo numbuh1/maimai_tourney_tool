@@ -214,6 +214,23 @@ $(document).on('click', '.btn-select-song, .btn-ban-song, .btn-remove-song', fun
     });
 });
 
+$(document).on('click', '#btnRandomList', function(event) {
+    event.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: $(this).data("url"),
+        dataType: 'json',
+        complete: function(data) {
+            $('#tblPool').DataTable().ajax.reload();
+        },
+    });
+});
+
 $(document).on('click', '.roulette', function(event) {
     var option = {
         speed : 10,
@@ -255,4 +272,25 @@ $('body').on('hidden.bs.modal', function () {
     {
         $('body').addClass('modal-open');
     }
+});
+
+$(document).on('change', '.submit-pool', function(event) {
+    event.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: $('#urlPoolUpdate').val(),
+        data: {
+            key: $(this).attr('name'),
+            value: $(this).val(),
+        },
+        dataType: 'json',
+        complete: function(data) {
+            
+        },
+    });
 });
