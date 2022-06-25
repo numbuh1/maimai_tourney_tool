@@ -8,6 +8,7 @@ use App\Models\MapPoolItem;
 use App\Models\Song;
 use App\Models\Chart;
 use App\Models\Player;
+use App\Models\PlayersInMapPools;
 
 class MapPoolController extends Controller
 {
@@ -26,12 +27,14 @@ class MapPoolController extends Controller
     	$map_pool = new MapPool();
         $map_pool->name = 'New Map Pool';
         $map_pool->save();
-        $players = Player::where('is_eliminated', 0)->get();
+        $pool_players = PlayersInMapPools::where('map_pool_id', $map_pool->id)->pluck('player_id')->toArray();
+        $players = Player::where('is_eliminated', 0)->orWhereIn('id', $pool_players)->get();
 
     	$data = [
     		'pool' => $map_pool,
     		'pool_items' => array(),
-            'players' => $players
+            'players' => $players,
+            'pool_players' => $pool_players
     	];
 
         return redirect()->route('pool.edit', ['id' => $map_pool->id]);
@@ -48,12 +51,14 @@ class MapPoolController extends Controller
     {
     	$map_pool = MapPool::find($id);
     	$map_pool_items = MapPoolItem::where('map_pool_id', $id)->get();
-        $players = Player::where('is_eliminated', 0)->get();
+        $pool_players = PlayersInMapPools::where('map_pool_id', $map_pool->id)->pluck('player_id')->toArray();
+        $players = Player::where('is_eliminated', 0)->orWhereIn('id', $pool_players)->get();
 
     	$data = [
     		'pool' => $map_pool,
     		'pool_items' => $map_pool_items,
-            'players' => $players
+            'players' => $players,
+            'pool_players' => $pool_players
     	];
 
     	return view('pool.edit', $data);
@@ -63,11 +68,32 @@ class MapPoolController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $key = $input['key'];
+        $key = $input['key'] ?? '';
+        if(!$key) return 0;
         $value = $input['value'];
-        $map_pool = MapPool::find($id);
-        $map_pool->$key = $value;
-        $map_pool->save();
+        if($key == 'players') {
+            $players_left_in_pool = PlayersInMapPools::where('map_pool_id', $id)->pluck('player_id', 'player_id')->toArray();
+            foreach ($value as $player_id) {
+                $player_in_pool = PlayersInMapPools::where('map_pool_id', $id)
+                                                    ->where('player_id', $player_id)
+                                                    ->first();
+                if(!$player_in_pool) {
+                    $player_in_pool = new PlayersInMapPools();
+                    $player_in_pool->map_pool_id = $id;
+                    $player_in_pool->player_id = $player_id;
+                    $player_in_pool->save();
+                } else {
+                    unset($players_left_in_pool[$player_id]);
+                }
+            }
+            $players_left_in_pool = PlayersInMapPools::where('map_pool_id', $id)
+                                                    ->whereIn('player_id', $players_left_in_pool)
+                                                    ->delete();
+        } else {
+            $map_pool = MapPool::find($id);
+            $map_pool->$key = $value;
+            $map_pool->save();            
+        }
 
     	return 1;
     }
@@ -151,6 +177,16 @@ class MapPoolController extends Controller
             $item->order = $key + 1;
             $item->save();
         }        
+
+        return 1;
+    }
+
+    // Lock Pool
+    public function lock(Request $request, $poolId)
+    {
+        $item = MapPool::find($poolId);
+        $item->is_locked = 1;
+        $item->save();
 
         return 1;
     }

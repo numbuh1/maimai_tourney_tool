@@ -4,6 +4,7 @@ const selectDiff = $('#selectSongModal #selectDiff')
 const selectLevelMin = $('#selectSongModal #selectLevelMin')
 const selectLevelMax = $('#selectSongModal #selectLevelMax')
 const selectRandomNumber = $('#selectSongModal #selectRandomNumber')
+const txtSearch = $('#selectSongModal #txtSearch')
 
 const confirmSongImage = $('#confirmSelectSongModal #songImage')
 const confirmSongName = $('#confirmSelectSongModal #songName')
@@ -17,6 +18,8 @@ const confirmSongVersion = $('#confirmSelectSongModal #songVersion')
 let poolTable = $('#tblPool')
 
 $(document).ready(function() {
+    $('#btnShowList').hide();
+    
     $('.modal').on('shown.bs.modal', function (e) {
         $(this).find('.select2').select2({
             dropdownParent: $(this).find('.modal-content')
@@ -70,7 +73,8 @@ $(document).on('click', '#btnShowSongs', function() {
             version: selectVersion.val(),
             difficulty: selectDiff.val(),
             levelMin: selectLevelMin.val(),
-            levelMax: selectLevelMax.val()
+            levelMax: selectLevelMax.val(),
+            search: txtSearch.val(),
         },
         dataType: 'json',
         complete: function(data) {
@@ -94,11 +98,15 @@ $(document).on('click', '#btnShowSongs', function() {
 });
 
 $(document).on('click', '#btnHideList', function() {
-    $('#songList').hide();
+    $('#btnShowList').show();
+    $('#btnHideList').hide();
+    $('#tblPool').hide();
 });
 
 $(document).on('click', '#btnShowList', function() {
-    $('#songList').show();
+    $('#btnShowList').hide();
+    $('#btnHideList').show();
+    $('#tblPool').show();
 });
 
 $(document).on('click', '#btnRandomSongs', function() {
@@ -214,8 +222,13 @@ $(document).on('click', '.btn-select-song, .btn-ban-song, .btn-remove-song', fun
     });
 });
 
-$(document).on('click', '#btnRandomList', function(event) {
+$(document).on('click', '#btnRandomList, #btnLockPool', function(event) {
     event.preventDefault();
+    if($(this).data('type') == 'lock') {
+        if (!confirm("Confirm locking this pool?")) {
+            return;
+        }
+    }
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -226,7 +239,11 @@ $(document).on('click', '#btnRandomList', function(event) {
         url: $(this).data("url"),
         dataType: 'json',
         complete: function(data) {
-            $('#tblPool').DataTable().ajax.reload();
+            if($(this).data('type') == 'lock') {
+                location.reload();
+            } else {
+                $('#tblPool').DataTable().ajax.reload();
+            }            
         },
     });
 });

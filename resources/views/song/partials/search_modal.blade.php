@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="form-group col-md-6 col-12">
                         <label>Category</label>
-                        <select id="selectCategory" class="form-control select2" multiple>
+                        <select id="selectCategory" class="form-control selectpicker" multiple>
                             @foreach(config('game.categories') as $category)
                                 <option value="{{$category}}">{{$category}}</option>
                             @endforeach
@@ -20,7 +20,7 @@
                     </div>
                     <div class="form-group col-md-6 col-6">
                         <label>Version</label>
-                        <select id="selectVersion" class="form-control select2" multiple>
+                        <select id="selectVersion" class="form-control selectpicker" multiple>
                             @foreach(config('game.versions') as $version)
                                 <option value="{{$version}}">{{$version}}</option>
                             @endforeach
@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group col-md-6 col-6">
                         <label>Difficulty</label>
-                        <select id="selectDiff" class="form-control select2" multiple>
+                        <select id="selectDiff" class="form-control selectpicker" multiple>
                             @foreach(config('game.difficulties') as $key => $diff)
                                 <option value="{{$key}}">{{$diff}}</option>
                             @endforeach
@@ -55,11 +55,16 @@
                         </select> -->
                     </div>
                     <div class="form-group col-md-6 col-6">
+                        <label>Search Term</label>
+                        <input type="text" id="txtSearch" class="form-control">
+                    </div>
+                    <div class="form-group col-md-6 col-6">
                         <label>Person Picking</label>
                         <select id="selectMapPoolItemType" class="form-control">
                             <option value="Player 1">Player 1</option>
                             <option value="Player 2">Player 2</option>
                             <option value="Random">Random</option>
+                            <option value="Host">Host</option>
                         </select>
                     </div>                    
                 </div>

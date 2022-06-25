@@ -44,6 +44,7 @@ Route::get('/pools/{id}/edit', [MapPoolController::class, 'edit'])->name('pool.e
 Route::get('/pools/{id}/show', [MapPoolController::class, 'show'])->name('pool.show');
 Route::get('/pools/store', [MapPoolController::class, 'store'])->name('pool.store');
 Route::post('/pools/{id}/random', [MapPoolController::class, 'random'])->name('pool.random');
+Route::post('/pools/{id}/lock', [MapPoolController::class, 'lock'])->name('pool.lock');
 Route::post('/pools/{id}/update', [MapPoolController::class, 'update'])->name('pool.update');
 Route::post('/pools/{id}/items', [MapPoolController::class, 'getItems'])->name('pool.items');
 Route::post('/pools/{id}/item/add', [MapPoolController::class, 'storeItem'])->name('pool.storeItems');

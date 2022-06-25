@@ -61,7 +61,10 @@ class MapPoolItem extends Model
             		$selectButton = '<a href="#" class="btn m-1 btn-info btn-select-song" data-id="' . $item->id . '" data-action="' . route('pool.item.select', ['id' => $item->id, 'select' => 1]) . '">Select Song</a>';
             	}
 
-            	$removeButton = '<a href="#" class="btn m-1 btn-secondary btn-remove-song" data-id="' . $item->id . '" data-action="' . route('pool.item.remove', ['id' => $item->id]) . '">Remove Song</a>';
+                $removeButton = '';
+                if($pool->is_locked == 0) {
+                    $removeButton = '<a href="#" class="btn m-1 btn-secondary btn-remove-song" data-id="' . $item->id . '" data-action="' . route('pool.item.remove', ['id' => $item->id]) . '">Remove Song</a>';
+                }            	
 
                 switch ($item->item_type) {
                     case 'Player 1':

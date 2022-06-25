@@ -22,6 +22,7 @@ class Chart extends Model
     	$levelMin = $input['levelMin'] ?? '';
     	$difficulty = $input['difficulty'] ?? '';
     	$banned = $input['banned'] ?? [];
+        $search = $input['search'] ?? '';
 
     	$query = Song::select(
                     'charts.internalLevel',
@@ -60,7 +61,14 @@ class Chart extends Model
     		$query->whereNotIn('charts.id', $banned);
     	}
 
-    	$charts = $query->orderBy('rec_sort', 'asc')->get();
+        if($search) {
+            $query->where(function ($q) use ($search) {
+                $q->orWhere('songs.title', 'LIKE', "%{$search}%")
+                    ->orWhere('songs.artist', 'LIKE', "%{$search}%");
+            });
+        }
+
+    	$charts = $query->orderBy('songs.rec_sort', 'asc')->orderBy('charts.id', 'asc')->get();
 
     	return $charts;
     }

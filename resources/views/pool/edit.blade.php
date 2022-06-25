@@ -21,7 +21,8 @@
                 @else
                     <form id="frmPool" method="POST" action="{{ route('pool.store') }}">
                         @method('POST')
-                @endif                	
+                @endif
+                	<input type="hidden" id="txtMapPoolLock" value="{{ $pool->is_locked }}">
 				    <div class="row">
 				        <div class="col-md-6">
 				            <div class="form-group">
@@ -37,27 +38,13 @@
 				        </div>
 				    </div>
 				    <div class="row">
-				    	<div class="col-md-3">
+				    	<div class="col-md-6">
 				            <div class="form-group">
-				                <label>Player 1</label>
+				                <label>Players</label>
 				                <div class="input-group">
-				                	<select id="player_1" class="form-control submit-pool" name="player_1">
-				                		<option></option>
+				                	<select id="players" class="form-control submit-pool selectpicker" data-actions-box="true" name="players" multiple @if($pool->is_locked == 1) disabled @endif>
 				                		@foreach($players as $player)
-				                			<option value="{{ $player->id }}" @if($player->id == $pool->player_1) selected @endif>{{ $player->name }}</option>
-				                		@endforeach
-				                	</select>
-								</div>
-				            </div>
-				        </div>
-				        <div class="col-md-3">
-				            <div class="form-group">
-				                <label>Player 2</label>
-				                <div class="input-group">
-				                	<select id="player_2" class="form-control submit-pool" name="player_2">
-				                		<option></option>
-				                		@foreach($players as $player)
-				                			<option value="{{ $player->id }}"@if($player->id == $pool->player_2) selected @endif>{{ $player->name }}</option>
+				                			<option value="{{ $player->id }}" @if(in_array($player->id, $pool_players)) selected @endif>{{ $player->name }}</option>
 				                		@endforeach
 				                	</select>
 								</div>
@@ -68,7 +55,14 @@
 				    <div id="songList" class="row">
 				        <div class="col-md-12">
 				            <div class="form-group">
-				                <label>Songs</label>
+				            	 <div class="row">
+				    				<div class="col-md-12">
+				                		<label>Songs</label>
+
+						                <a id="btnHideList" href="#" class="mr-2 mb-2 float-right btn btn-sm btn-danger">Hide List</a>
+						                <a id="btnShowList" href="#" class="mr-2 mb-2 float-right btn btn-sm btn-info">Show List</a>
+						            </div>
+						        </div>
 				                <table id="tblPool" class="table table-bordered" data-url="{{ route('pool.items', ['id' => $pool->id]) }}">
 				                	<thead>
 				                		<tr>
@@ -87,12 +81,16 @@
 				    <hr>
 				    <div class="row">
 				    	<div class="col-md-12">
-			                <a id="btnAddSong" href="#" class="float-right btn btn-primary">Add Song</a>
-			                <a id="btnHideList" href="#" class="mr-2 float-left btn btn-danger">Hide List</a>
-			                <a id="btnShowList" href="#" class="mr-2 float-left btn btn-info">Show List</a>
-			                <a id="btnRandomList" href="#" class="mr-2 float-left btn btn-info" data-url="{{ route('pool.random', ['id' => $pool->id]) }}">Random List</a>
+				    		@if($pool->is_locked == 0)
+			                	<a id="btnAddSong" href="#" class="float-right btn btn-primary">Add Song</a>
+			                	<a id="btnLockPool" href="#" class="mr-2 float-right btn btn-danger" data-type="lock" data-url="{{ route('pool.lock', ['id' => $pool->id]) }}">Lock Pool</a>
+			                	<a id="btnRandomList" href="#" class="mr-2 float-left btn btn-success" data-type="random" data-url="{{ route('pool.random', ['id' => $pool->id]) }}">Random List</a>
+				    		@endif
 			            </div>
 		            </div>
+		            @if($pool->is_locked)
+
+		            @endif
             	</form>
 	    	</div>
 	    </div>
@@ -106,12 +104,14 @@
 	<link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}" >
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="/vendor/select2/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 @stop
 
 @section('js')
     <script> console.log('Hi!'); </script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" charset="utf8" src="/vendor/select2/js/select2.full.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 	<script src="{{ mix('js/app.js') }}" defer></script>
     <script src="{{ mix('js/pool/edit.js') }}" defer></script>
 @stop
