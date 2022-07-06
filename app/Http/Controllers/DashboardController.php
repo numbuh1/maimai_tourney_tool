@@ -179,6 +179,8 @@ class DashboardController extends Controller
     // TEST
     public function test()
     {
+        return $this->drawMapPool([3569, 3581, 3585, 3589], 1, 250, 'background.png', 'test-image.png', false);
+
         # If you don't know the type of image you are using as your originals.
         // $image = imagecreatefromstring(file_get_contents('stream-layout.png'));
         // $frame = imagecreatefromstring(file_get_contents('https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/d3867397e9923cd2f91007cf9e34bded36b3ff2b61fc241df9377f525dc7e646.png'));
@@ -206,23 +208,33 @@ class DashboardController extends Controller
         $select1 = 0;
         $ban1 = 1;
         $ban2 = 2;
-        for ($i=0; $i < 5; $i++) { 
-            while(true) {
-                $select = 0;
-                $lock = 0;
-                $chart = Chart::join('songs','charts.song_id','songs.id')
-                            ->whereIn('difficulty', ['expert', 'master', 'remaster'])
-                            ->whereNotNull('songs.sega_song_id')
-                            ->where('level_value', '>=', '12')
-                            ->inRandomOrder()->first();
-                $song = Song::find($chart->song_id) ?? null;
-                if(!$song) continue;
-                if($i == $select1) $select = 1;
-                if($i == $ban1 || $i == $ban2) $lock = 1;
-                $this->addImage($layout, $song, $chart, $x, 650, $song->short_name ?? $song->title, $lock, $select);
-                break;
-            }
-            $song_data[] = $chart->song_id;
+        $select = 0;
+        $lock = 0;
+        // for ($i=0; $i < 5; $i++) { 
+        //     while(true) {
+        //         $select = 0;
+        //         $lock = 0;
+        //         $chart = Chart::join('songs','charts.song_id','songs.id')
+        //                     ->whereIn('difficulty', ['expert', 'master'])
+        //                     ->whereNotNull('songs.sega_song_id')
+        //                     ->where('level_value', '>=', '12')
+        //                     ->inRandomOrder()->first();
+        //         $song = Song::find($chart->song_id) ?? null;
+        //         if(!$song) continue;
+        //         if($i == $select1) $select = 1;
+        //         if($i == $ban1 || $i == $ban2) $lock = 1;
+        //         $this->addBountySong($layout, $song, $chart, $x, 350, $song->short_name ?? $song->title, $song->artist, $lock, $select);
+        //         break;
+        //     }
+        //     $song_data[] = $chart->song_id;
+        //     $x+=350;
+        // }
+
+        $charts = Chart::join('songs','charts.song_id','songs.id')
+                        ->whereIn('charts.id', [3569, 3581, 3585, 3589])->get();
+        foreach ($charts as $key => $chart) {
+            $song = Song::find($chart->song_id) ?? null;
+            $this->addBountySong($layout, $song, $chart, $x, 250, $song->short_name ?? $song->title, $song->artist, $lock, $select);
             $x+=350;
         }
 
@@ -233,7 +245,66 @@ class DashboardController extends Controller
         return 1;
     }
 
-    public function addImage(&$layout, $song, $chart, $srcX, $srcY, $text, $lock, $select) {
+    public function drawMapPool($items, $scale, $y, $background, $file_name, $showPlayer)
+    {
+        $song_width = 325;
+        $song_height = 500;
+
+        $max_scale = 2;
+        $min_scale = 0.1;
+
+        $padding = 0;
+        $min_padding = 100;
+        $max_padding = 2000;
+
+        while(true) {
+            $padding = 1920 - ($song_width * $scale * count($items));
+            if($padding > $max_padding) {
+                $scale -= 0.005;
+            }
+            if($padding < $max_padding) {
+                $scale += 0.005;
+            }
+            $check_padding = 1920 - ($song_width * $scale * count($items));
+            if($scale >= $max_scale || $scale <= $min_scale || $check_padding < $min_padding || $check_padding > $max_padding) {
+                break;
+            }
+        };
+
+        $song_height *= $scale;
+        $y =  (1080 - $song_height) / 2.5;
+
+        $layout = $background;
+        $layout = imagecreatefrompng($layout);
+        $layout= imagescale ( $layout, 1920 , 1080);
+        imagefilter($layout, IMG_FILTER_BRIGHTNESS, -50);
+        
+        imagealphablending($layout, true);
+        imagesavealpha($layout, true);
+
+        $x = $padding / 2;
+        $song_data = [];
+
+        $charts = Chart::join('songs','charts.song_id','songs.id')
+                        ->whereIn('charts.id', [3573,3577,3593,3597])->get();
+        foreach ($charts as $key => $item) {
+            $chart = $item;
+            $song = Song::find($item->song_id) ?? null;
+            $song_image = $this->addBountySong($layout, $song, $chart, $x, $y, $song->title_eng ?? $song->title, $song->artist_eng ?? $song->artist, 0, 0, $item, 0);
+            // imagefilter($song_image, IMG_FILTER_SMOOTH, 1000);
+            // imagefilter($song_image, IMG_FILTER_SMOOTH);
+            imagecopyresized($layout, $song_image, $x, $y, 0, 0, $song_width * $scale, 550 * $scale, $song_width, 550);
+            $x += $song_width * $scale;
+        }
+
+        $file = $file_name;
+        imagepng($layout, $file_name);
+        return '<img src="/' . $file_name . '">';
+        //dd($song_data);
+        return 1;
+    }
+
+    public function addTourneySong(&$layout, $song, $chart, $srcX, $srcY, $text, $lock, $select) {
         if(strlen($chart->sega_song_id) > 4) {
             $chart->sega_song_id = substr($chart->sega_song_id, 1, 5);
         }
@@ -354,7 +425,225 @@ class DashboardController extends Controller
         } catch (\Exception $e) {
             throw $e;
             // $songs = Song::pluck('imageName', 'id');
+            // $this->addTourneySong($layout, $songs[rand(77, 1121)], $srcX, $srcY);
+        }
+    }
+
+    public function addBountySong($layout, $song, $chart, $srcX, $srcY, $title, $artist, $lock, $select, $item, $showPlayer) {
+
+        $layout = imagecreatefrompng('song-layout.png');
+        $layout= imagescale ( $layout, 355 , 550);
+        // imagefilter($layout, IMG_FILTER_BRIGHTNESS, -50);
+        $srcY = 100;
+        $srcX = 20;
+        
+        imagealphablending($layout, true);
+        imagesavealpha($layout, true);
+
+        if(strlen($song->sega_song_id) > 4) {
+            $song->sega_song_id = substr($song->sega_song_id, 1, 5);
+        }
+        $song_sega_id = sprintf("%06d", $song->sega_song_id);
+        $song_file = 'img/song_image/UI_Jacket_' . $song_sega_id . '_s.png';
+        try {
+            $baseImage = imagecreatefrompng('img/song_layout/base_' . $chart->difficulty . '.png');
+            $songImage = imagecreatefrompng($song_file);
+            $typeImage = imagecreatefrompng('img/song_layout/type_' . $chart->type . '.png');
+            $levelBaseImage = imagecreatefrompng('img/song_layout/base_' . $chart->difficulty . '_lower.png');
+            // $levelImage = imagecreatefrompng('img/song_layout/level_' . $chart->level . '.png');
+            // $titleBaseImage = imagecreatefrompng('img/song_layout/title.png');
+
+            imagecopyresized($layout, $baseImage, $srcX, $srcY-47, 0, 0, 316, 516, 284, 464);
+            imagecopyresized($layout, $songImage, $srcX + 47, $srcY + 37, 0, 0, 221, 220, 200, 200);
+            imagecopyresized($layout, $typeImage, $srcX, $srcY - 3, 0, 0, 180, 60, 120, 40);
+
+            imagecopyresized($layout, $levelBaseImage, $srcX + 171, $srcY + 220, 0, 0, 124, 76, 124, 76);
+            // imagecopyresized($layout, $levelImage, $srcX + 180, $srcY + 220 - 5, 0, 0, 161, 80, 322, 160);
+            // imagecopyresized($layout, $titleBaseImage, $srcX, $srcY + 300, 0, 0, 316, 88, 300, 88);
+
+            $white = imagecolorallocate($layout, 255, 255, 255);
+            $black = imagecolorallocate($layout, 0, 0, 0);
+            
+            $font_niku = 'font/nikumaru.otf';
+            $font = 'font/YasashisaGothicBold-V2.otf';
+            $size = 14;
+
+            // if(strlen($text) > 18) {
+            //     $stringCut = substr($text, 0, 18);
+            //     $endPoint = strrpos($stringCut, ' ');
+
+            //     $text = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+            //     $text .= '...';
+            // }
+
+            $box = imagettfbbox(20, 0, $font, $title);
+            $text_width = abs($box[2]) - abs($box[0]);
+            $text_height = abs($box[5]) - abs($box[3]);
+            $x = (316 - $text_width) / 2;
+
+            $this->imagettfstroketext($layout, 20, 0, $srcX + 216, $srcY + 280, $white, $black, $font, $chart->level, 2);
+
+            $box = imagettfbbox($size, 0, $font, $title);
+            $text_width = abs($box[2]) - abs($box[0]);
+            $text_height = abs($box[5]) - abs($box[3]);
+            $x = (316 - $text_width) / 2;
+
+            $this->imagettfstroketext($layout, $size, 0, $srcX + $x, $srcY + 318, $white, $black, $font, $title, 1);
+
+            $box = imagettfbbox($size, 0, $font, $artist);
+            $text_width = abs($box[2]) - abs($box[0]);
+            $text_height = abs($box[5]) - abs($box[3]);
+            $x = (316 - $text_width) / 2;
+            $this->imagettfstroketext($layout, $size, 0, $srcX + $x, $srcY + 347, $white, $black, $font, $artist, 1);
+
+            $bounties = $this->getBounty($chart->level);
+            // dd($bounties);
+
+            foreach ($bounties as $key => $bounty) {
+                switch ($key) {
+                    case 'grade':
+                        $grade_y = 366;
+                        foreach ($bounty as $bounty_key => $bounty_value) {                            
+                            $gradeImage = imagecreatefrompng('img/song_layout/grade_' . $bounty_key . '.png');
+                            imagecopyresized($layout, $gradeImage, $srcX + 47, $srcY + $grade_y, 0, 0, 33, 33, 52, 52);
+
+                            $box = imagettfbbox(13, 0, $font, $bounty_value);
+                            $this->imagettfstroketext($layout, 13, 0, $srcX + 90, $srcY + $grade_y + 20, $black, $white, $font, $bounty_value, 1);
+
+                            $grade_y += 40;
+                        }
+                        break;
+                    case 'rank':
+                        $rank_y = 368;
+                        foreach ($bounty as $bounty_key => $bounty_value) {                            
+                            $rankImage = imagecreatefrompng('img/song_layout/grade_' . $bounty_key . '.png');
+                            imagecopyresized($layout, $rankImage, $srcX + 147, $srcY + $rank_y, 0, 0, 60, 24, 60, 24);
+
+                            $box = imagettfbbox(13, 0, $font, $bounty_value);
+                            $this->imagettfstroketext($layout, 13, 0, $srcX + 220, $srcY + $rank_y + 17, $black, $white, $font, $bounty_value, 1);
+
+                            $rank_y += 40;
+                        }
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+            }
+
+            return $layout;
+        } catch (\Exception $e) {
+            //dd($song_sega_id);
+            throw $e;
+            // $songs = Song::pluck('imageName', 'id');
             // $this->addImage($layout, $songs[rand(77, 1121)], $srcX, $srcY);
+        }
+
+        // $file = 'test_song.png';
+        // imagepng($layout, 'test_song.png');
+        // return '<img src="/' . 'test_song.png' . '">';
+    }
+
+    public function getBounty($level) {
+        $result = [
+            'grade' => [],
+            'rank' => [],
+        ];
+        switch ($level) {
+            case '12':
+                $result['rank']['sss+'] = '5k';
+                $result['grade']['ap'] = '20k';
+                $result['grade']['fc+'] = '10k';
+                break;
+            case '12+':
+                $result['rank']['sss+'] = '10k';
+                $result['grade']['ap'] = '25k';
+                $result['grade']['fc+'] = '15k';
+                break;
+            case '13':
+                $result['rank']['sss+'] = '15k';
+                $result['rank']['sss'] = '5k';
+                $result['grade']['ap'] = '35k';
+                $result['grade']['fc+'] = '20k';
+                break;
+            case '13+':
+                $result['rank']['sss+'] = '25k';
+                $result['rank']['sss'] = '15k';
+                $result['grade']['ap'] = '50k';
+                $result['grade']['fc'] = '20k';
+                break;
+            case '14+':
+                $result['rank']['sss'] = '100k';
+                $result['rank']['ss'] = '25k';
+                $result['grade']['fc+'] = '150k';
+                $result['grade']['fc'] = '75k';
+                break;
+            default:
+                # code...
+                break;
+        }
+        return $result;
+    }
+
+    public function addBountySong_bk(&$layout, $song, $chart, $srcX, $srcY, $title, $artist, $lock, $select) {
+        if(strlen($chart->sega_song_id) > 4) {
+            $chart->sega_song_id = substr($chart->sega_song_id, 1, 5);
+        }
+        $song_sega_id = sprintf("%06d", $chart->sega_song_id);
+        //$song_file = 'https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/' . $song->imageName;
+        $song_file = 'img/song_image/UI_Jacket_' . $song_sega_id . '_s.png';
+        try {
+
+            $baseImage = imagecreatefrompng('img/song_layout/base_' . $chart->difficulty . '.png');
+            $songImage = imagecreatefrompng($song_file);
+            $typeImage = imagecreatefrompng('img/song_layout/type_' . $chart->type . '.png');
+            // $levelBaseImage = imagecreatefrompng('img/song_layout/level_base.png');
+            // $levelImage = imagecreatefrompng('img/song_layout/level_' . $chart->level . '.png');
+            // $titleBaseImage = imagecreatefrompng('img/song_layout/title.png');
+            
+            imagecopyresized($layout, $baseImage, $srcX, $srcY-47, 0, 0, 316, 516, 284, 464);
+            imagecopyresized($layout, $songImage, $srcX + 47, $srcY + 37, 0, 0, 221, 220, 200, 200);
+            imagecopyresized($layout, $typeImage, $srcX, $srcY - 3, 0, 0, 180, 60, 120, 40);
+
+            // imagecopyresized($layout, $levelBaseImage, $srcX + 180, $srcY + 220, 0, 0, 156, 92, 156, 92);
+            // imagecopyresized($layout, $levelImage, $srcX + 180, $srcY + 220 - 5, 0, 0, 161, 80, 322, 160);
+            // imagecopyresized($layout, $titleBaseImage, $srcX, $srcY + 300, 0, 0, 316, 88, 300, 88);
+            //imagecopyresized($layout, $textBgImage, $srcX, $srcY + 300, 0, 0, 316, 88, 168, 64);
+            // imagecopyresized($layout, $textBgImage, $srcX, $srcY + 300, 0, 0, 316, 88, 540, 68);
+
+            $white = imagecolorallocate($layout, 255, 255, 255);
+            $black = imagecolorallocate($layout, 0, 0, 0);
+            //$font = 'font/nikumaru.otf';
+            $font = 'font/YasashisaGothicBold-V2.otf';
+            $size = 12;
+
+            //$text = $this->makeTextBlock($text, $font, 20, 190);
+            // if(strlen($text) > 18) {
+            //     $stringCut = substr($text, 0, 18);
+            //     $endPoint = strrpos($stringCut, ' ');
+
+            //     $text = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+            //     $text .= '...';
+            // }
+
+            $box = imagettfbbox($size, 0, $font, $title);
+            $text_width = abs($box[2]) - abs($box[0]);
+            $text_height = abs($box[5]) - abs($box[3]);
+            $x = (316 - $text_width) / 2;
+
+            $this->imagettfstroketext($layout, $size, 0, $srcX + $x, $srcY + 318, $white, $black, $font, $title, 1);
+
+            $box = imagettfbbox($size, 0, $font, $artist);
+            $text_width = abs($box[2]) - abs($box[0]);
+            $text_height = abs($box[5]) - abs($box[3]);
+            $x = (316 - $text_width) / 2;
+            $this->imagettfstroketext($layout, $size, 0, $srcX + $x, $srcY + 347, $white, $black, $font, $artist, 1);
+            // imagettftext($layout, $size, 0, $srcX + $x, $srcY + 300, $black, $font, $text);
+            return $layout;
+        } catch (\Exception $e) {
+            throw $e;
+            // $songs = Song::pluck('imageName', 'id');
+            // $this->addTourneySong($layout, $songs[rand(77, 1121)], $srcX, $srcY);
         }
     }
 

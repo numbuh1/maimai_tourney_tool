@@ -15,9 +15,9 @@ class CreateMapPoolScoresTable extends Migration
     {
         Schema::create('map_pool_scores', function (Blueprint $table) {
             $table->id();
-            $table->integer('map_pool_id');
+            $table->integer('map_pool_item_id');
             $table->integer('player_id');
-            $table->float('achievement_score')->nullable();
+            $table->double('achievement_score', 8, 4)->nullable();
             $table->integer('dx_score')->nullable();
             $table->string('photo_path')->nullable();
             $table->timestamps();

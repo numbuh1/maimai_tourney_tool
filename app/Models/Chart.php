@@ -32,6 +32,7 @@ class Chart extends Model
     				'charts.difficulty',
     				'charts.level',
     				'charts.id as chart_id',
+                    'songs.sega_song_id'
     			)
     			->leftJoin('charts', 'charts.song_id', 'songs.id')
     			->whereNotNull('charts.level');

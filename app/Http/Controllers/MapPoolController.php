@@ -9,6 +9,7 @@ use App\Models\Song;
 use App\Models\Chart;
 use App\Models\Player;
 use App\Models\PlayersInMapPools;
+use App\Models\Score;
 
 class MapPoolController extends Controller
 {
@@ -50,16 +51,48 @@ class MapPoolController extends Controller
     public function edit($id)
     {
     	$map_pool = MapPool::find($id);
-    	$map_pool_items = MapPoolItem::where('map_pool_id', $id)->get();
-        $pool_players = PlayersInMapPools::where('map_pool_id', $map_pool->id)->pluck('player_id')->toArray();
-        $players = Player::where('is_eliminated', 0)->orWhereIn('id', $pool_players)->get();
+    	$map_pool_items = MapPoolItem::where('map_pool_id', $id)->where('is_banned', 0)->get()->keyBy('id');
+        $map_pool_item_ids = MapPoolItem::where('map_pool_id', $id)->pluck('id');
+        $pool_player_ids = PlayersInMapPools::where('map_pool_id', $map_pool->id)->orderBy('player_id')->pluck('player_id')->toArray();
+        $pool_players = PlayersInMapPools::join('players', 'players.id', 'player_in_map_pool.player_id')->where('map_pool_id', $map_pool->id)->orderBy('player_id')->get();
+        $players = Player::where('is_eliminated', 0)->orWhereIn('id', $pool_player_ids)->get();
+        $scores = Score::whereIn('map_pool_item_id', $map_pool_item_ids)->get();
+        $map_pool_chart_ids = MapPoolItem::where('map_pool_id', $id)->pluck('chart_id');
+        $map_pool_song_ids = Chart::whereIn('id', $map_pool_chart_ids)->pluck('song_id');
+        $map_pool_songs = Song::join('charts', 'charts.song_id', 'songs.id')->join('map_pool_items', 'map_pool_items.chart_id', 'charts.id')->whereIn('charts.id', $map_pool_chart_ids)->where('map_pool_items.is_banned', 0)->orderBy('map_pool_items.id')->get();
 
-    	$data = [
-    		'pool' => $map_pool,
-    		'pool_items' => $map_pool_items,
+        // Get scores
+        $player_scores = [];
+        $ranking_scores = [];
+        $achievement_scores = [];
+        $dx_scores = [];
+        foreach ($pool_player_ids as $key => $player_id) {
+            $query = Score::whereIn('map_pool_item_id', $map_pool_item_ids)
+                        ->where('player_id', $player_id);
+            $player_scores[$player_id] = $query->get()->keyBy('map_pool_item_id');
+            $achievement_scores[$player_id] = $query->sum('achievement_score');
+            $dx_scores[$player_id] = $query->sum('dx_score');
+        }
+
+        $ranking_scores = $achievement_scores;
+        arsort($ranking_scores);
+        $ranking = array_flip(array_keys($ranking_scores));
+
+        // dd($player_scores[1][2]->dx_score)
+        // dd($map_pool_items);
+
+        $data = [
+            'pool' => $map_pool,
+            'pool_items' => $map_pool_items,
             'players' => $players,
-            'pool_players' => $pool_players
-    	];
+            'pool_player_ids' => $pool_player_ids,
+            'pool_players' => $pool_players,
+            'scores' => $player_scores,
+            'map_pool_songs' => $map_pool_songs,
+            'ranking' => $ranking,
+            'achievement_scores' => $achievement_scores,
+            'dx_scores' => $dx_scores,
+        ];
 
     	return view('pool.edit', $data);
     }
@@ -113,9 +146,9 @@ class MapPoolController extends Controller
     }
 
     // Show datatable
-    public function getItems(Request $request)
+    public function getItems(Request $request, $id)
     {
-        return MapPoolItem::list($request);
+        return MapPoolItem::list($request, $id);
     }
 
     // Store Map Pool Item

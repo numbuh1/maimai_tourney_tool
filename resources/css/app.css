@@ -40,3 +40,27 @@
 .modal {
   overflow-y:auto;
 }
+
+.badge-basic {
+    background-color: green;
+    color: white;
+}
+
+.badge-advanced {
+    background-color: yellow;
+}
+
+.badge-expert {
+    background-color: red;
+    color: white;
+}
+
+.badge-master {
+    background-color: purple;
+    color: white;
+}
+
+.badge-remaster {
+    background-color: violet;
+    color: white;
+}

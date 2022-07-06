@@ -12,7 +12,7 @@ class MapPoolItem extends Model
 {
     use HasFactory;
 
-    public static function list(Request $request)
+    public static function list(Request $request, $id)
     {
         $columns = array(
             0 => 'order',
@@ -30,7 +30,8 @@ class MapPoolItem extends Model
         				'map_pool_items.id as id'
         			)
         			->join('songs', 'songs.id', 'map_pool_items.song_id')
-        			->join('charts', 'charts.id', 'map_pool_items.chart_id');
+        			->join('charts', 'charts.id', 'map_pool_items.chart_id')
+                    ->where('map_pool_id', $id);
 
         $totalFiltered = $query->count();
         $items = $query->orderBy($order, $dir)->get();

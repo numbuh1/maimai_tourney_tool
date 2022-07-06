@@ -8,11 +8,6 @@
 
 @section('content')
     <div id="container-user">
-	    <div class="card shadow mb-4">
-		    <div class="card-header py-3">
-		        <h6 class="m-0 font-weight-bold text-primary">Map Pool</h6>
-		    </div>
-		    <div class="card-body">
 	    		@if (isset($pool) && $pool->id)
                     <form id="frmPool" method="POST" action="{{ route('pool.update', ['id' => $pool->id]) }}" enctype="multipart/form-data">
                     	<input type="hidden" id="urlPoolUpdate" value="{{ route('pool.update', ['id' => $pool->id]) }}">
@@ -44,7 +39,7 @@
 				                <div class="input-group">
 				                	<select id="players" class="form-control submit-pool selectpicker" data-actions-box="true" name="players" multiple @if($pool->is_locked == 1) disabled @endif>
 				                		@foreach($players as $player)
-				                			<option value="{{ $player->id }}" @if(in_array($player->id, $pool_players)) selected @endif>{{ $player->name }}</option>
+				                			<option value="{{ $player->id }}" @if(in_array($player->id, $pool_player_ids)) selected @endif>{{ $player->name }}</option>
 				                		@endforeach
 				                	</select>
 								</div>
@@ -89,13 +84,60 @@
 			            </div>
 		            </div>
 		            @if($pool->is_locked)
-
+		            	<div id="scoreList" class="row">
+					        <div class="col-md-12">
+					            <div class="form-group">
+					            	 <div class="row">
+					    				<div class="col-md-12">
+					                		<label>Scores</label>
+							            </div>
+							        </div>
+					                <table id="tblScore" class="table table-bordered" >
+					                	<thead>
+					                		<tr>
+					                			<th>Player</th>
+					                			@foreach($map_pool_songs as $song)
+					                				<th class="text-center">
+					                					<!-- <img width="100" src="https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/{{ $song->imageName }}"> -->
+					                					{{ $song->title }} <span class="badge badge-{{ $song->difficulty }}">{{ $song->difficulty }}</span>
+					                				</th>
+					                			@endforeach
+					                			<th>Total</th>
+					                			<th>Rank</th>
+					                		</tr>
+					                	</thead>
+					                	<tbody>
+					                		@foreach($pool_players as $player)
+					                			<tr>
+					                				<td>{{ $player->name }}</td>
+					                			@foreach($pool_items as $item_id => $item)
+					                				<td>
+					                					<b>Score: </b> {{ $scores[$player->id][$item_id]->achievement_score ?? '-' }}<br/>
+					                					<b>DX: </b> {{ $scores[$player->id][$item_id]->dx_score ?? '-' }}<br/>
+					                					<b>Image: </b>
+					                						@if(isset($scores[$player->id][$item_id]->photo_path))
+					                							<a href="#" class="showImage" data-url="{{ '/uploads/'. $scores[$player->id][$item_id]->photo_path }}">Link</a>
+					                						@endif
+					                					<br/>
+					                					<a id="btnAddScore" href="{{ route('score.edit', ['item_id' => $item->id, 'player_id' => $player->id]) }}" class="mr-2 mb-2 float-right btn btn-sm btn-info">Edit</a>
+					                				</td>
+					                			@endforeach
+					                				<td>
+					                					<b>Score: </b> {{ $achievement_scores[$player->id] }}<br>
+					                					<b>DX: </b> {{ $dx_scores[$player->id] }}<br>
+					                				</td>
+					                				<td>{{ $ranking[$player->id] + 1 }}</td>
+					                			</tr>
+					                		@endforeach
+					                	</tbody>
+					                </table>
+					            </div>
+					        </div>
+					    </div>
 		            @endif
             	</form>
-	    	</div>
-	    </div>
 	</div>
-
+	@include('pool.partials.image_modal')
 	@include('song.partials.select_modal')
 	@include('song.partials.search_modal')
 @stop

@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\MapPoolController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,3 +56,9 @@ Route::post('/pool-item/{id}/select/{select}', [MapPoolController::class, 'selec
 Route::post('/pool-item/{id}/remove', [MapPoolController::class, 'removeItem'])->name('pool.item.remove');
 Route::get('/pools-item/{id}/roulette', [MapPoolController::class, 'roulette'])->name('pool.item.roulette');
 //Route::get('/song/{id}', [SongController::class, 'detail'])->name('song.detail');
+
+// MAP POOL SCORES
+Route::post('/pools/{id}/scores', [ScoreController::class, 'getScores'])->name('pool.scores');
+Route::get('/score/edit/{item_id}/{player_id}', [ScoreController::class, 'edit'])->name('score.edit');
+Route::post('/score/store/{item_id}/{player_id}', [ScoreController::class, 'store'])->name('score.store');
+Route::post('/score/update/{item_id}/{player_id}/{score_id}', [ScoreController::class, 'update'])->name('score.update');

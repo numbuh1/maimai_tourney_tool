@@ -83,9 +83,12 @@ $(document).on('click', '#btnShowSongs', function() {
             $('#song-pane').html('');
             for (var i = 0; i < charts.length; i++) {
                 let kind = charts[i].type == 'dx' ? 'dx' : 'standard';
+                // let sega_song_id = charts[i].sega_song_id ? charts[i].sega_song_id.toString() : '0';
+                // sega_song_id = sega_song_id.substring(sega_song_id.length - 4).padStart(6, '0');
                 let html =  '<div class="col-md-2 col-6">' +
                                 '<a href="#" class="song-select text-dark" data-id="' + charts[i].chart_id + '"><div class="card" style="width: 8rem;">' +
                                     '<img class="card-img-top chart-thumbnail chart-' + charts[i].difficulty + '" src="https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/' + charts[i].imageName + '" alt="Card image cap">' +
+                                    // '<img class="card-img-top chart-thumbnail chart-' + charts[i].difficulty + '" src="/img/song_image/UI_Jacket_' + sega_song_id + '_s.png" alt="Card image cap">' +                                    
                                     '<img src="https://maimaidx-eng.com/maimai-mobile/img/music_' + kind + '.png" class="music_kind_icon ">' +
                                     '<div class="music_lv_back text-center">' + charts[i].level + '</div>' +
                                 '</div></a>' +
@@ -311,3 +314,9 @@ $(document).on('change', '.submit-pool', function(event) {
         },
     });
 });
+
+$(document).on('click', '.showImage', function(event) {
+    event.preventDefault();
+    $('#imageModal #imageContent').attr('src', $(this).data('url'));
+    $('#imageModal').modal('toggle');    
+})
