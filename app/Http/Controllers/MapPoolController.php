@@ -298,13 +298,13 @@ class MapPoolController extends Controller
         // return 1;
     }
 
-    public function drawMapPool($items, $scale, $y, $background, $file_name, $showPlayer)
+    public function drawMapPool($items, $scale, $y, $background, $file_name, $showPlayer, $scale_vertical = true)
     {
         $song_width = 355;
         $song_height = 500;
 
         $max_scale = 2;
-        $min_scale = 0.1;
+        $min_scale = 1;
 
         $padding = 0;
         $min_padding = 300;
@@ -325,7 +325,8 @@ class MapPoolController extends Controller
         };
 
         $song_height *= $scale;
-        $y =  (1080 - $song_height) / 2;
+        if($scale_vertical)
+            $y =  (1080 - $song_height) / 2;
 
         $layout = $background;
         $layout = imagecreatefrompng($layout);
@@ -343,11 +344,13 @@ class MapPoolController extends Controller
             $select = $item->is_selected ? 1 : 0;
             $lock = $item->is_banned ? 1 : 0;
             $song_image = $this->addImage($layout, $song, $chart, $x, $y, $song->short_name ?? $song->title, $lock, $select, $item, $showPlayer);
-            imagefilter($song_image, IMG_FILTER_SMOOTH, 100);
+            imagefilter($song_image, IMG_FILTER_SMOOTH, 50);
             imagecopyresized($layout, $song_image, $x, $y, 0, 0, $song_width * $scale, 500 * $scale, $song_width, 500);
             $song_data[] = $chart->song_id;
             $x += $song_width * $scale;
         }
+
+        imagefilter($layout, IMG_FILTER_SMOOTH, 50);
 
         $file = $file_name;
         imagepng($layout, $file_name);
@@ -499,14 +502,17 @@ class MapPoolController extends Controller
             $baseImage = imagecreatefrompng('img/song_layout/frame_' . $chart->difficulty . '.png');
             $songImage = imagecreatefrompng($song_file);
             $typeImage = imagecreatefrompng('img/song_layout/type_' . $chart->type . '.png');
-            $levelBaseImage = imagecreatefrompng('img/song_layout/level_base.png');
+            // $levelBaseImage = imagecreatefrompng('img/song_layout/level_base.png');
+            $levelBaseImage = imagecreatefrompng('img/song_layout/base_' . $chart->difficulty . '_lower.png');
             $levelImage = imagecreatefrompng('img/song_layout/level_' . $chart->level . '.png');
             $titleBaseImage = imagecreatefrompng('img/song_layout/title.png');
+            $boardImage = imagecreatefrompng('img/song_layout/board.png');
 
             if($lock) {                
                 imagefilter($baseImage, IMG_FILTER_GRAYSCALE);
                 imagefilter($songImage, IMG_FILTER_GRAYSCALE);
                 imagefilter($typeImage, IMG_FILTER_GRAYSCALE);
+                // imagefilter($levelBaseImage, IMG_FILTER_GRAYSCALE);
                 imagefilter($levelBaseImage, IMG_FILTER_GRAYSCALE);
                 imagefilter($levelImage, IMG_FILTER_GRAYSCALE);
                 imagefilter($titleBaseImage, IMG_FILTER_GRAYSCALE);
@@ -543,11 +549,14 @@ class MapPoolController extends Controller
                 imagecopyresized($layout, $select02Image, $srcX + 20, $srcY + 185, 0, 0, 64, 84, 64, 84);
             }
 
-            imagecopyresized($layout, $levelBaseImage, $srcX + 180, $srcY + 220, 0, 0, 156, 92, 156, 92);
-            imagecopyresized($layout, $levelImage, $srcX + 180, $srcY + 220 - 5, 0, 0, 161, 80, 322, 160);
-            imagecopyresized($layout, $titleBaseImage, $srcX, $srcY + 300, 0, 0, 316, 88, 300, 88);
+            imagecopyresized($layout, $boardImage, $srcX + 22, $srcY + 280, 0, 0, 270, 120, 916, 518);
+            // imagecopyresized($layout, $levelBaseImage, $srcX + 180, $srcY + 220, 0, 0, 156, 92, 156, 92);
+            imagecopyresized($layout, $levelBaseImage, $srcX + 152, $srcY + 185, 0, 0, 124, 76, 124, 76);
+            imagecopyresized($layout, $levelImage, $srcX + 204, $srcY + 180, 150, 0, 97, 90, 172, 160);
+            // imagecopyresized($layout, $titleBaseImage, $srcX, $srcY + 300, 0, 0, 316, 88, 300, 88);
 
-            if(!$showPlayer) {
+            // dd(!$showPlayer);
+            if($showPlayer) {
                 if($item->type != 'Random') {
                     $bubbleTextImage = imagecreatefrompng('img/song_layout/player_textbox.png');
                     imagecopyresized($layout, $bubbleTextImage, $srcX + 80, $srcY - 95, 0, 0, 156, 92, 156, 92);    
@@ -565,7 +574,8 @@ class MapPoolController extends Controller
 
             $white = imagecolorallocate($layout, 255, 255, 255);
             $black = imagecolorallocate($layout, 0, 0, 0);
-            $font = 'font/nikumaru.otf';
+            // $font = 'font/nikumaru.otf';
+            $font = 'font/YasashisaGothicBold-V2.otf';
             $size = 15;
 
             if(strlen($text) > 18) {
@@ -581,7 +591,8 @@ class MapPoolController extends Controller
             $text_height = abs($box[5]) - abs($box[3]);
             $x = (316 - $text_width) / 2;
 
-            $this->imagettfstroketext($layout, $size, 0, $srcX + $x, $srcY + 350, $white, $black, $font, $text, 1);
+            imagettftext($layout, $size, 0, $srcX + $x, $srcY + 330, $black, $font, $text);
+            // $this->imagettfstroketext($layout, $size, 0, $srcX + $x, $srcY + 330, $white, $black, $font, $text, 1);
 
             return $layout;
         } catch (\Exception $e) {
@@ -625,5 +636,46 @@ class MapPoolController extends Controller
                 $bg = imagettftext($image, $size, $angle, $c1, $c2, $strokecolor, $fontfile, $text);
 
        return imagettftext($image, $size, $angle, $x, $y, $textcolor, $fontfile, $text);
+    }
+
+    public function showLayout($poolId, $showPlayer = false)
+    {
+        $pool = MapPool::find($poolId);
+        $items = MapPoolItem::where('map_pool_id', $poolId)->orderBy('order')->get();
+
+        $songs = Song::join('charts','charts.song_id','songs.id')
+                        ->whereNotNull('sega_song_id')
+                        ->groupBy('songs.id')
+                        ->pluck('songs.id');
+        $song_names = Song::pluck('title', 'id');
+    
+        // return $this->drawMapPool($items, 1, 570, 'stream-layout.png', 'test-pool-image.png', $showPlayer, false);
+        return $this->drawMapPool($items, 1, 570, 'test-background.png', 'test-pool-image.png', $showPlayer, false);
+
+        // $layout = 'background.png';
+        // $layout = imagecreatefrompng($layout);
+        // $layout= imagescale ( $layout, 1920 , 1080);
+        // imagefilter($layout, IMG_FILTER_BRIGHTNESS, -50);
+        
+        // imagealphablending($layout, true);
+        // imagesavealpha($layout, true);
+
+        // $x = 100;
+        // $song_data = [];
+        // foreach ($items as $key => $item) {            
+        //     $chart = Chart::find($item->chart_id);
+        //     $song = Song::find($chart->song_id);
+        //     $select = $item->is_selected ? 1 : 0;
+        //     $lock = $item->is_banned ? 1 : 0;
+        //     $this->addImage($layout, $song, $chart, $x, 350, $song->short_name ?? $song->title, $lock, $select, $item, $showPlayer);
+        //     $song_data[] = $chart->song_id;
+        //     $x+=350;
+        // }
+
+        // $file = 'test-pool-image.png';
+        // imagepng($layout, 'test-pool-image.png');
+        // return '<img src="/test-pool-image.png">';
+        // //dd($song_data);
+        // return 1;
     }
 }

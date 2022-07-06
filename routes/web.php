@@ -43,6 +43,8 @@ Route::get('/pools', [MapPoolController::class, 'index'])->name('pool.index');
 Route::get('/pools/add', [MapPoolController::class, 'add'])->name('pool.add');
 Route::get('/pools/{id}/edit', [MapPoolController::class, 'edit'])->name('pool.edit');
 Route::get('/pools/{id}/show', [MapPoolController::class, 'show'])->name('pool.show');
+Route::get('/pools/{id}/showLayout/{showPlayer}', [MapPoolController::class, 'showLayout'])->name('pool.showLayout');
+
 Route::get('/pools/store', [MapPoolController::class, 'store'])->name('pool.store');
 Route::post('/pools/{id}/random', [MapPoolController::class, 'random'])->name('pool.random');
 Route::post('/pools/{id}/lock', [MapPoolController::class, 'lock'])->name('pool.lock');
@@ -59,6 +61,7 @@ Route::get('/pools-item/{id}/roulette', [MapPoolController::class, 'roulette'])-
 
 // MAP POOL SCORES
 Route::post('/pools/{id}/scores', [ScoreController::class, 'getScores'])->name('pool.scores');
+Route::get('/pools/{id}/showScores', [ScoreController::class, 'showScores'])->name('pool.showScores');
 Route::get('/score/edit/{item_id}/{player_id}', [ScoreController::class, 'edit'])->name('score.edit');
 Route::post('/score/store/{item_id}/{player_id}', [ScoreController::class, 'store'])->name('score.store');
 Route::post('/score/update/{item_id}/{player_id}/{score_id}', [ScoreController::class, 'update'])->name('score.update');
