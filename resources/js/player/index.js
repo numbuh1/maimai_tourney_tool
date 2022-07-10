@@ -29,7 +29,7 @@ $(document).on('click', '#btnSubmitPlayer', function() {
         data: {
             id: $('#playerEditId').val(),
             name: $('#txtPlayerName').val(),
-            is_eliminated: $('#chkEliminated').val(),
+            is_eliminated: $('#chkEliminated').prop('checked'),
         },
         dataType: 'json',
         complete: function(data) {
