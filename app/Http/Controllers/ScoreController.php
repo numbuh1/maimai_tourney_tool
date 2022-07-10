@@ -319,9 +319,9 @@ class ScoreController extends Controller
 
             // Score rank
             if($firstRank) {
-                $resultImage = imagecreatefrompng('img/score_layout/vs_win.png');
+                $resultImage = @imagecreatefrompng('img/score_layout/vs_win.png');
             } else {
-                $resultImage = imagecreatefrompng('img/score_layout/vs_lose.png');
+                $resultImage = @imagecreatefrompng('img/score_layout/vs_lose.png');
             }
             $resultScale = 0.5;
 
