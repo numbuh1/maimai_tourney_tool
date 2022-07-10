@@ -88,6 +88,7 @@ class ScoreController extends Controller
         }
 
         $score->save();
+        $this->showScores($pool->id);
 
         return redirect()
                 ->route('pool.edit', ['id' => $pool->id]);
@@ -214,7 +215,7 @@ class ScoreController extends Controller
         $file_name = 'test-score-image.png';
         $file = $file_name;
         imagepng($layout, $file_name);
-        return '<img src="/' . $file_name . '">';
+        // return '<img src="/' . $file_name . '">';
         //dd($song_data);
         return 1;
     }
