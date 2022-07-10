@@ -178,6 +178,7 @@ class MapPoolController extends Controller
         $item->order = $count + 1;
 
         $item->save();
+        $this->show($id);
 
         return 1;
     }
@@ -188,6 +189,7 @@ class MapPoolController extends Controller
         $item = MapPoolItem::find($id);
         $item->is_selected = $select;
         $item->save();
+        $this->show($id);
 
         return 1;
     }
@@ -198,6 +200,7 @@ class MapPoolController extends Controller
         $item = MapPoolItem::find($id);
         $item->is_banned = $ban;
         $item->save();
+        $this->show($id);
 
         return 1;
     }
@@ -207,6 +210,7 @@ class MapPoolController extends Controller
     {
         $item = MapPoolItem::find($id);
         $item->delete();
+        $this->show($id);
 
         return 1;
     }
@@ -218,7 +222,8 @@ class MapPoolController extends Controller
         foreach ($items as $key => $item) {
             $item->order = $key + 1;
             $item->save();
-        }        
+        }
+        $this->show($poolId);
 
         return 1;
     }
@@ -229,6 +234,7 @@ class MapPoolController extends Controller
         $item = MapPool::find($poolId);
         $item->is_locked = 1;
         $item->save();
+        $this->show($id);
 
         return 1;
     }
@@ -278,7 +284,9 @@ class MapPoolController extends Controller
                         ->pluck('songs.id');
         $song_names = Song::pluck('title', 'id');
     
-        return $this->drawMapPool($items, 1, 350, 'background.png', 'test-pool-image.png', $showPlayer);
+        $this->drawMapPool($items, 1, 350, 'background.png', 'test-pool-image.png', $showPlayer);
+
+        return 1;
 
         // $layout = 'background.png';
         // $layout = imagecreatefrompng($layout);
