@@ -252,6 +252,11 @@ return [
             'url'  => 'pools',
             'icon' => 'fas fa-fw fa-file',
         ],
+        [
+            'text' => 'Players',
+            'url'  => 'players',
+            'icon' => 'fas fa-fw fa-user',
+        ],
         ['header' => 'Config Settings'],
         [
             'text' => 'Songs',

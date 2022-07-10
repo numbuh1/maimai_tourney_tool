@@ -3,12 +3,14 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Show</th>
             <th>Action</th>
         </tr>
         </thead>
         <tfoot>
         <tr>
             <th>Name</th>
+            <th>Show</th>
             <th>Action</th>
         </tr>
         </tfoot>
@@ -17,8 +19,13 @@
                 <tr>
                     <td>{{ $pool->name }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-success">Show</a>
-                        <a href="{{ route('pool.edit', ['id' => $pool->id]) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <a target="blank" href="{{ route('pool.show', ['id' => $pool->id]) }}" class="btn btn-sm btn-info">Show Pool</a>
+                        @if($pool->allow_scores)
+                            <a target="blank" href="{{ route('pool.showScores', ['id' => $pool->id]) }}" class="btn btn-sm btn-success">Show Scores</a>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('pool.edit', ['id' => $pool->id]) }}" class="btn btn-sm btn-secondary">Edit</a>
                         <a href="#" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>

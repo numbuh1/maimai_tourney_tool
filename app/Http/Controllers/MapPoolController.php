@@ -16,8 +16,17 @@ class MapPoolController extends Controller
     // List Map Pool
     public function index()
     {
+        $pools = MapPool::All();
+        foreach ($pools as $key => $pool) {
+            $player_count = PlayersInMapPools::where('map_pool_id', $pool->id)->count();
+            if($player_count <= 2 && $pool->is_locked) {
+                $pool->allow_scores = true;
+            } else {
+                $pool->allow_scores = false;
+            }
+        }
     	$data = [
-    		'pools' => MapPool::all()
+    		'pools' => $pools,
     	];
     	return view('pool.index', $data);
     }

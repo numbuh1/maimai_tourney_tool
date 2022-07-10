@@ -33,3 +33,8 @@ mix.js('resources/js/pool/edit.js', 'public/js/pool')
     .webpackConfig({ devtool: 'source-map' })
     .sourceMaps()
     .version();
+
+mix.js('resources/js/player/index.js', 'public/js/player')
+    .webpackConfig({ devtool: 'source-map' })
+    .sourceMaps()
+    .version();

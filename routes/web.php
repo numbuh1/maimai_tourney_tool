@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\MapPoolController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,3 +66,8 @@ Route::get('/pools/{id}/showScores', [ScoreController::class, 'showScores'])->na
 Route::get('/score/edit/{item_id}/{player_id}', [ScoreController::class, 'edit'])->name('score.edit');
 Route::post('/score/store/{item_id}/{player_id}', [ScoreController::class, 'store'])->name('score.store');
 Route::post('/score/update/{item_id}/{player_id}/{score_id}', [ScoreController::class, 'update'])->name('score.update');
+
+// PLAYERS
+Route::get('/players', [PlayerController::class, 'index'])->name('player.index');
+Route::post('/players/store', [PlayerController::class, 'store'])->name('player.store');
+Route::post('/players/{id}/delete', [PlayerController::class, 'delete'])->name('player.delete');
