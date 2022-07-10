@@ -14,7 +14,7 @@ class DashboardController extends Controller
     //
     public function index()
     {
-        $this->updateConstant();
+        // $this->updateConstant();
 
         return view('dashboard.index');
     }
