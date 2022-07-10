@@ -29,7 +29,8 @@ class PlayerController extends Controller
     	}
     	$player->name = $input['name'];
         $is_eliminated = 0;
-        if(isset($input['is_eliminated']) && $input['is_eliminated'])
+        $input['is_eliminated'];
+        if(isset($input['is_eliminated']) && $input['is_eliminated'] != 'false')
             $is_eliminated = 1;
     	$player->is_eliminated = $is_eliminated;
     	$player->save();
