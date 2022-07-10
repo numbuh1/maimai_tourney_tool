@@ -208,6 +208,25 @@ $(document).on('click', '#btnConfirmSelectSong', function() {
     });
 });
 
+$(document).on('click', '#btnRefreshPool', function() {
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: $(this).data("url"),
+        data: {
+            mapPoolId: $('#txtMapPoolId').val(),
+        },
+        dataType: 'json',
+        complete: function(data) {
+            console.log('Refreshed');
+        },
+    });
+});
+
 $(document).on('click', '.btn-select-song, .btn-ban-song, .btn-remove-song', function(event) {
     event.preventDefault();
     $.ajaxSetup({

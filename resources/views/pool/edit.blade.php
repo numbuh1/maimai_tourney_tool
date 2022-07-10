@@ -53,7 +53,8 @@
 		            	 <div class="row">
 		    				<div class="col-md-12">
 		                		<label>Songs</label>
-
+		                		
+		                		<a id="btnRefreshPool" href="#" class="mr-2 mb-2 float-right btn btn-sm btn-success" data-url="{{ route('pool.refresh') }}">Refresh</a>
 				                <a id="btnHideList" href="#" class="mr-2 mb-2 float-right btn btn-sm btn-danger">Hide List</a>
 				                <a id="btnShowList" href="#" class="mr-2 mb-2 float-right btn btn-sm btn-info">Show List</a>
 				            </div>

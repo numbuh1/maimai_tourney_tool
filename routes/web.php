@@ -52,6 +52,7 @@ Route::post('/pools/{id}/lock', [MapPoolController::class, 'lock'])->name('pool.
 Route::post('/pools/{id}/update', [MapPoolController::class, 'update'])->name('pool.update');
 Route::post('/pools/{id}/items', [MapPoolController::class, 'getItems'])->name('pool.items');
 Route::post('/pools/{id}/item/add', [MapPoolController::class, 'storeItem'])->name('pool.storeItems');
+Route::post('/pools/refresh', [MapPoolController::class, 'refresh'])->name('pool.refresh');
 
 // MAP POOL ITEMS
 Route::post('/pool-item/{id}/ban/{ban}', [MapPoolController::class, 'banItem'])->name('pool.item.ban');

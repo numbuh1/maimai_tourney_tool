@@ -178,8 +178,17 @@ class MapPoolController extends Controller
         $item->order = $count + 1;
 
         $item->save();
-        $this->show($id);
+        $this->show($input['mapPoolId']);
 
+        return 1;
+    }
+
+    // Refresh Pool
+    public function refresh(Request $request)
+    {
+        $input = $request->all();
+
+        $this->show($input['mapPoolId']);
         return 1;
     }
 
