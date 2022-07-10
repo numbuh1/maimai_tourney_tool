@@ -32,4 +32,5 @@
     <script> console.log('Hi!'); </script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/pool/edit.js') }}" defer></script>
 @stop

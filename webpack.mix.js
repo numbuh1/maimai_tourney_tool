@@ -29,6 +29,11 @@ mix.js('resources/js/song/index.js', 'public/js/song')
     .sourceMaps()
     .version();
 
+mix.js('resources/js/pool/index.js', 'public/js/pool')
+    .webpackConfig({ devtool: 'source-map' })
+    .sourceMaps()
+    .version();
+
 mix.js('resources/js/pool/edit.js', 'public/js/pool')
     .webpackConfig({ devtool: 'source-map' })
     .sourceMaps()

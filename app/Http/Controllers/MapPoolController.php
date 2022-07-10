@@ -677,7 +677,7 @@ class MapPoolController extends Controller
         $song_names = Song::pluck('title', 'id');
     
         // return $this->drawMapPool($items, 1, 570, 'stream-layout.png', 'test-pool-image.png', $showPlayer, false);
-        $this->drawMapPool($items, 1, 570, 'test-background.png', 'test-pool-image.png', $showPlayer, false);
+        $this->drawMapPool($items, 1, 570, 'stream-layout.png', 'test-layout.png', $showPlayer, false);
 
         return 1;
 
@@ -706,5 +706,14 @@ class MapPoolController extends Controller
         // return '<img src="/test-pool-image.png">';
         // //dd($song_data);
         // return 1;
+    }
+
+    public function delete($id, Request $request)
+    {
+        $pool = MapPool::find($id);
+        if($pool) {
+            $pool->delete();
+        }
+        return 1;
     }
 }
