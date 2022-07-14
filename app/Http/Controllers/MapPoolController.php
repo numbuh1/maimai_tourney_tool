@@ -412,7 +412,7 @@ class MapPoolController extends Controller
         // }
 
         $originalY = 200;
-        if(!empty($player_names)) {
+        if(!empty($player_names) && count($player_names) == 2) {
             $currentX = 435;
             foreach ($player_names as $player) {
 
