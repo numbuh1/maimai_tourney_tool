@@ -208,7 +208,8 @@ $(document).on('click', '#btnConfirmSelectSong', function() {
     });
 });
 
-$(document).on('click', '#btnRefreshPool', function() {
+$(document).on('click', '#btnRefreshPool, #btnRefreshScore', function(e) {
+    e.preventDefault();
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),

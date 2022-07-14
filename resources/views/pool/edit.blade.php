@@ -91,6 +91,7 @@
 			            	<div class="row">
 			    				<div class="col-md-12">
 			                		<label>Scores</label>
+			                		<a id="btnRefreshScore" href="#" class="mr-2 mb-2 float-right btn btn-sm btn-success" data-url="{{ route('score.refresh') }}">Show In Stream</a>
 					            </div>
 					        </div>
 			                <table id="tblScore" class="table table-bordered" >
@@ -132,7 +133,7 @@
 			                		@endforeach
 			                	</tbody>
 			                </table>
-			                <a href="{{ route('pool.showScores', ['id' => $pool->id]) }}" class="btn btn-primary btnShowScores" data-url="{{ route('pool.showScores', ['id' => $pool->id]) }}">Show Scores</a>			                
+			                <!-- <a href="{{ route('pool.showScores', ['id' => $pool->id]) }}" class="btn btn-primary btnShowScores" data-url="{{ route('pool.showScores', ['id' => $pool->id]) }}">Show Scores</a> -->
 			            </div>
 			        </div>
 			    </div>

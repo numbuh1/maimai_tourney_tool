@@ -88,7 +88,7 @@ class ScoreController extends Controller
         }
 
         $score->save();
-        $this->showScores($pool->id);
+        // $this->showScores($pool->id);
 
         return redirect()
                 ->route('pool.edit', ['id' => $pool->id]);
@@ -326,7 +326,7 @@ class ScoreController extends Controller
             }
             $resultScale = 0.5;
 
-            imagecopyresized($layout, $resultImage, 410, 35, 0, 0, 254 * $resultScale, 123 * $resultScale, 254, 123);
+            // imagecopyresized($layout, $resultImage, 410, 35, 0, 0, 254 * $resultScale, 123 * $resultScale, 254, 123);
         }
 
         return $layout;
@@ -404,19 +404,22 @@ class ScoreController extends Controller
         imagettftext($layout, $size, 0, 210, 70, $white, $font, 'TOTAL');
 
         // Score rank        
-        $resultScale = 1.5;
+        $resultScale = 0.5;
         $rankX = 90;
         $rankY = 150;
         // $rankBaseImage = imagecreatefrompng('img/score_layout/score_rankbase.png');
         // imagecopyresized($layout, $rankBaseImage, $rankX, $rankY, 0, 0, 128 * $resultScale, 108 * $resultScale, 128, 108);
 
         if($firstRank) {
-            $resultImage = imagecreatefrompng('img/score_layout/score_1st.png');
+            // $resultImage = imagecreatefrompng('img/score_layout/score_1st.png');
+            $resultImage = @imagecreatefrompng('img/score_layout/vs_win.png');
         } else {
-            $resultImage = imagecreatefrompng('img/score_layout/score_2nd.png');
+            // $resultImage = imagecreatefrompng('img/score_layout/score_2nd.png');
+            $resultImage = @imagecreatefrompng('img/score_layout/vs_lose.png');
         }
 
-        imagecopyresized($layout, $resultImage, $rankX + 30, $rankY + 30, 0, 0, 66 * $resultScale, 46 * $resultScale, 66, 46);
+        // imagecopyresized($layout, $resultImage, $rankX + 30, $rankY + 30, 0, 0, 66 * $resultScale, 46 * $resultScale, 66, 46);
+        imagecopyresized($layout, $resultImage, $rankX + 30, $rankY + 30, 0, 0, 254 * $resultScale, 123 * $resultScale, 254, 123);
 
         return $layout;
     }
@@ -593,5 +596,14 @@ class ScoreController extends Controller
                 $bg = imagettftext($image, $size, $angle, $c1, $c2, $strokecolor, $fontfile, $text);
 
        return imagettftext($image, $size, $angle, $x, $y, $textcolor, $fontfile, $text);
+    }
+
+    // Refresh Pool
+    public function refresh(Request $request)
+    {
+        $input = $request->all();
+
+        $this->showScores($input['mapPoolId']);
+        return 1;
     }
 }

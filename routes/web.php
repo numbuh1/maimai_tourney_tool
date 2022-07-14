@@ -68,6 +68,7 @@ Route::get('/pools/{id}/showScores', [ScoreController::class, 'showScores'])->na
 Route::get('/score/edit/{item_id}/{player_id}', [ScoreController::class, 'edit'])->name('score.edit');
 Route::post('/score/store/{item_id}/{player_id}', [ScoreController::class, 'store'])->name('score.store');
 Route::post('/score/update/{item_id}/{player_id}/{score_id}', [ScoreController::class, 'update'])->name('score.update');
+Route::post('/score/refresh', [ScoreController::class, 'refresh'])->name('score.refresh');
 
 // PLAYERS
 Route::get('/players', [PlayerController::class, 'index'])->name('player.index');

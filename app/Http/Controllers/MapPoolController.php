@@ -68,7 +68,7 @@ class MapPoolController extends Controller
         $scores = Score::whereIn('map_pool_item_id', $map_pool_item_ids)->get();
         $map_pool_chart_ids = MapPoolItem::where('map_pool_id', $id)->pluck('chart_id');
         $map_pool_song_ids = Chart::whereIn('id', $map_pool_chart_ids)->pluck('song_id');
-        $map_pool_songs = Song::join('charts', 'charts.song_id', 'songs.id')->join('map_pool_items', 'map_pool_items.chart_id', 'charts.id')->whereIn('charts.id', $map_pool_chart_ids)->where('map_pool_items.is_banned', 0)->orderBy('map_pool_items.id')->get();
+        $map_pool_songs = Song::join('charts', 'charts.song_id', 'songs.id')->join('map_pool_items', 'map_pool_items.chart_id', 'charts.id')->whereIn('charts.id', $map_pool_chart_ids)->where('map_pool_items.is_banned', 0)->orderBy('map_pool_items.order')->get();
 
         // Get scores
         $player_scores = [];
@@ -209,7 +209,7 @@ class MapPoolController extends Controller
         $item = MapPoolItem::find($id);
         $item->is_banned = $ban;
         $item->save();
-        $this->show($id);
+        $this->show($item->map_pool_id);
 
         return 1;
     }
@@ -219,7 +219,7 @@ class MapPoolController extends Controller
     {
         $item = MapPoolItem::find($id);
         $item->delete();
-        $this->show($id);
+        $this->show($item->map_pool_id);
 
         return 1;
     }
@@ -243,7 +243,7 @@ class MapPoolController extends Controller
         $item = MapPool::find($poolId);
         $item->is_locked = 1;
         $item->save();
-        $this->show($id);
+        $this->show($poolId);
 
         return 1;
     }
@@ -292,8 +292,14 @@ class MapPoolController extends Controller
                         ->groupBy('songs.id')
                         ->pluck('songs.id');
         $song_names = Song::pluck('title', 'id');
+
+        $players = Player::select('players.*')
+                        ->join('player_in_map_pool', 'player_in_map_pool.player_id', 'players.id')
+                        ->where('map_pool_id', $poolId)
+                        ->get();
+        $player_names = $players->pluck('name');
     
-        $this->drawMapPool($items, 1, 350, 'background.png', 'test-pool-image.png', $showPlayer);
+        $this->drawMapPool($items, 1, 350, 'background.png', 'test-pool-image.png', $showPlayer, true, $player_names);
         $this->showLayout($poolId);
 
         return 1;
@@ -325,7 +331,7 @@ class MapPoolController extends Controller
         // return 1;
     }
 
-    public function drawMapPool($items, $scale, $y, $background, $file_name, $showPlayer, $scale_vertical = true)
+    public function drawMapPool($items, $scale, $y, $background, $file_name, $showPlayer, $scale_vertical = true, $player_names = null)
     {
         $song_width = 355;
         $song_height = 500;
@@ -377,11 +383,39 @@ class MapPoolController extends Controller
             $x += $song_width * $scale;
         }
 
-        imagefilter($layout, IMG_FILTER_SMOOTH, 50);
+        if(!empty($player_names)) {
+            // Show name
+            $base_scale = 0.5;
+            $base_y = -50;
+            $baseImage = imagecreatefrompng('img/song_layout/upper_base.png');
+            imagecopyresized($layout, $baseImage, 400, 100 + $base_y, 0, 0, 1060 * $base_scale, 360 * $base_scale, 1060, 360);
+            imagecopyresized($layout, $baseImage, 1000, 100 + $base_y, 0, 0, 1060 * $base_scale, 360 * $base_scale, 1060, 360);
+            $battleBaseImage = imagecreatefrompng('img/song_layout/battle_base_2.png');
+            imagecopyresized($layout, $battleBaseImage, 885, 100 + $base_y, 0, 0, 114 * 1.5, 114 * 1.5, 114, 114);
+            $battleImage = imagecreatefrompng('img/song_layout/battle.png');
+            imagecopyresized($layout, $battleImage, 900, 100 + $base_y, 0, 0, 48 * 3, 60 * 3, 48, 60);
+
+            $white = imagecolorallocate($layout, 255, 255, 255);
+            $black = imagecolorallocate($layout, 0, 0, 0);
+            $font = 'font/nikumaru.otf';
+            $size = 43;
+
+            $box = imagettfbbox($size, 0, $font, $player_names[0]);
+            $text_width = abs($box[2]) - abs($box[0]);
+            $x = (1060 * $base_scale - $text_width) / 2;
+            imagettftext($layout, $size, 0, 400 + $x, 210 + $base_y, $black, $font, $player_names[0]);
+
+            $box = imagettfbbox($size, 0, $font, $player_names[1]);
+            $text_width = abs($box[2]) - abs($box[0]);
+            $x = (1060 * $base_scale - $text_width) / 2;
+            imagettftext($layout, $size, 0, 1000 + $x, 210 + $base_y, $black, $font, $player_names[1]);
+        }        
+
+        // imagefilter($layout, IMG_FILTER_SMOOTH, 50);
 
         $file = $file_name;
         imagepng($layout, $file_name);
-        return '<img src="/' . $file_name . '">';
+        // return '<img src="/' . $file_name . '">';
         //dd($song_data);
         return 1;
     }
