@@ -383,33 +383,60 @@ class MapPoolController extends Controller
             $x += $song_width * $scale;
         }
 
+        // if(!empty($player_names)) {
+        //     // Show name
+        //     $base_scale = 0.5;
+        //     $base_y = -50;
+        //     $baseImage = imagecreatefrompng('img/song_layout/upper_base.png');
+        //     imagecopyresized($layout, $baseImage, 400, 100 + $base_y, 0, 0, 1060 * $base_scale, 360 * $base_scale, 1060, 360);
+        //     imagecopyresized($layout, $baseImage, 1000, 100 + $base_y, 0, 0, 1060 * $base_scale, 360 * $base_scale, 1060, 360);
+        //     $battleBaseImage = imagecreatefrompng('img/song_layout/battle_base_2.png');
+        //     imagecopyresized($layout, $battleBaseImage, 885, 100 + $base_y, 0, 0, 114 * 1.5, 114 * 1.5, 114, 114);
+        //     $battleImage = imagecreatefrompng('img/song_layout/battle.png');
+        //     imagecopyresized($layout, $battleImage, 900, 100 + $base_y, 0, 0, 48 * 3, 60 * 3, 48, 60);
+
+        //     $white = imagecolorallocate($layout, 255, 255, 255);
+        //     $black = imagecolorallocate($layout, 0, 0, 0);
+        //     $font = 'font/nikumaru.otf';
+        //     $size = 43;
+
+        //     $box = imagettfbbox($size, 0, $font, $player_names[0]);
+        //     $text_width = abs($box[2]) - abs($box[0]);
+        //     $x = (1060 * $base_scale - $text_width) / 2;
+        //     imagettftext($layout, $size, 0, 400 + $x, 210 + $base_y, $black, $font, $player_names[0]);
+
+        //     $box = imagettfbbox($size, 0, $font, $player_names[1]);
+        //     $text_width = abs($box[2]) - abs($box[0]);
+        //     $x = (1060 * $base_scale - $text_width) / 2;
+        //     imagettftext($layout, $size, 0, 1000 + $x, 210 + $base_y, $black, $font, $player_names[1]);
+        // }
+
+        $originalY = 200;
         if(!empty($player_names)) {
-            // Show name
-            $base_scale = 0.5;
-            $base_y = -50;
-            $baseImage = imagecreatefrompng('img/song_layout/upper_base.png');
-            imagecopyresized($layout, $baseImage, 400, 100 + $base_y, 0, 0, 1060 * $base_scale, 360 * $base_scale, 1060, 360);
-            imagecopyresized($layout, $baseImage, 1000, 100 + $base_y, 0, 0, 1060 * $base_scale, 360 * $base_scale, 1060, 360);
+            $currentX = 435;
+            foreach ($player_names as $player) {
+
+                $player_image = imagecreatefrompng('img/score_layout/name_base.png');
+                imagecopyresized($layout, $player_image, $currentX + 25, $originalY - 110, 0, 0, 308 * 1.5, 60 * 1.5, 308, 60);
+
+                // Name
+                $blue = imagecolorallocate($layout, 16, 57, 123);
+                $font = 'font/YasashisaGothicBold-V2.otf';
+                $size = 30;
+
+                $box = imagettfbbox($size, 0, $font, $player);
+                $text_width = abs($box[2]) - abs($box[0]);
+                $x = $currentX + 10 + (496 - $text_width) / 2;
+                imagettftext($layout, $size, 0, $x, $originalY - 50, $blue, $font, $player);
+
+                $currentX += 560;
+            }
+
             $battleBaseImage = imagecreatefrompng('img/song_layout/battle_base_2.png');
-            imagecopyresized($layout, $battleBaseImage, 885, 100 + $base_y, 0, 0, 114 * 1.5, 114 * 1.5, 114, 114);
+            imagecopyresized($layout, $battleBaseImage, 885, -150 + $originalY, 0, 0, 114 * 1.5, 114 * 1.5, 114, 114);
             $battleImage = imagecreatefrompng('img/song_layout/battle.png');
-            imagecopyresized($layout, $battleImage, 900, 100 + $base_y, 0, 0, 48 * 3, 60 * 3, 48, 60);
-
-            $white = imagecolorallocate($layout, 255, 255, 255);
-            $black = imagecolorallocate($layout, 0, 0, 0);
-            $font = 'font/nikumaru.otf';
-            $size = 43;
-
-            $box = imagettfbbox($size, 0, $font, $player_names[0]);
-            $text_width = abs($box[2]) - abs($box[0]);
-            $x = (1060 * $base_scale - $text_width) / 2;
-            imagettftext($layout, $size, 0, 400 + $x, 210 + $base_y, $black, $font, $player_names[0]);
-
-            $box = imagettfbbox($size, 0, $font, $player_names[1]);
-            $text_width = abs($box[2]) - abs($box[0]);
-            $x = (1060 * $base_scale - $text_width) / 2;
-            imagettftext($layout, $size, 0, 1000 + $x, 210 + $base_y, $black, $font, $player_names[1]);
-        }        
+            imagecopyresized($layout, $battleImage, 900, -150 + $originalY, 0, 0, 48 * 3, 60 * 3, 48, 60);
+        }
 
         // imagefilter($layout, IMG_FILTER_SMOOTH, 50);
 
