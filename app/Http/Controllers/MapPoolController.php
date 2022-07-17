@@ -454,7 +454,9 @@ class MapPoolController extends Controller
         // imagepng($layout, $file_name);
         $file = $file_name . '.bak';
         imagepng($layout, $file);
-        unlink($file_name);
+        if(file_exists($file_name)) {
+            unlink($file_name);
+        }
         rename($file, $file_name);
         //dd($song_data);
         return 1;
