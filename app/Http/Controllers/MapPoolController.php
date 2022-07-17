@@ -60,7 +60,11 @@ class MapPoolController extends Controller
     public function edit($id)
     {
     	$map_pool = MapPool::find($id);
-    	$map_pool_items = MapPoolItem::where('map_pool_id', $id)->where('is_banned', 0)->get()->keyBy('id');
+    	$map_pool_items = MapPoolItem::where('map_pool_id', $id)
+                            ->where('is_banned', 0)
+                            ->orderBy('map_pool_items.order')
+                            ->get()
+                            ->keyBy('id');
         $map_pool_item_ids = MapPoolItem::where('map_pool_id', $id)->pluck('id');
         $pool_player_ids = PlayersInMapPools::where('map_pool_id', $map_pool->id)->orderBy('player_id')->pluck('player_id')->toArray();
         $pool_players = PlayersInMapPools::join('players', 'players.id', 'player_in_map_pool.player_id')->where('map_pool_id', $map_pool->id)->orderBy('player_id')->get();
@@ -68,7 +72,13 @@ class MapPoolController extends Controller
         $scores = Score::whereIn('map_pool_item_id', $map_pool_item_ids)->get();
         $map_pool_chart_ids = MapPoolItem::where('map_pool_id', $id)->pluck('chart_id');
         $map_pool_song_ids = Chart::whereIn('id', $map_pool_chart_ids)->pluck('song_id');
-        $map_pool_songs = Song::join('charts', 'charts.song_id', 'songs.id')->join('map_pool_items', 'map_pool_items.chart_id', 'charts.id')->whereIn('charts.id', $map_pool_chart_ids)->where('map_pool_items.is_banned', 0)->orderBy('map_pool_items.order')->get();
+        $map_pool_songs = Song::join('charts', 'charts.song_id', 'songs.id')
+                            ->join('map_pool_items', 'map_pool_items.chart_id', 'charts.id')
+                            ->whereIn('charts.id', $map_pool_chart_ids)
+                            ->where('map_pool_items.is_banned', 0)
+                            ->where('map_pool_items.map_pool_id', $id)
+                            ->orderBy('map_pool_items.order')
+                            ->get();
 
         // Get scores
         $player_scores = [];
