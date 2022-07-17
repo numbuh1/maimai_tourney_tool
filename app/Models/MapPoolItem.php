@@ -56,6 +56,7 @@ class MapPoolItem extends Model
             		$banButton = '<a href="#" class="btn m-1 btn-danger btn-ban-song" data-id="' . $item->id . '" data-action="' . route('pool.item.ban', ['id' => $item->id, 'ban' => 1]) . '">Ban Song</a>';
             	}
 
+                $selectButton = '';
             	// if($item->is_selected) {
             	// 	$selectButton = '<a href="#" class="btn m-1 btn-info btn-select-song" data-id="' . $item->id . '" data-action="' . route('pool.item.select', ['id' => $item->id, 'select' => 0]) . '">De-select Song</a>';
             	// } else {
