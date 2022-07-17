@@ -319,7 +319,7 @@ class MapPoolController extends Controller
         //     $song = Song::find($chart->song_id);
         //     $select = $item->is_selected ? 1 : 0;
         //     $lock = $item->is_banned ? 1 : 0;
-        //     $this->addImage($layout, $song, $chart, $x, 350, $song->short_name ?? $song->title, $lock, $select, $item, $showPlayer);
+        //     $this->addSongImage($layout, $song, $chart, $x, 350, $song->short_name ?? $song->title, $lock, $select, $item, $showPlayer);
         //     $song_data[] = $chart->song_id;
         //     $x+=350;
         // }
@@ -376,7 +376,7 @@ class MapPoolController extends Controller
             $song = Song::find($chart->song_id);
             $select = $item->is_selected ? 1 : 0;
             $lock = $item->is_banned ? 1 : 0;
-            $song_image = $this->addImage($layout, $song, $chart, $x, $y, $song->short_name ?? $song->title, $lock, $select, $item, $showPlayer);
+            $song_image = $this->addSongImage($layout, $song, $chart, $x, $y, $song->short_name ?? $song->title, $lock, $select, $item, $showPlayer);
             imagefilter($song_image, IMG_FILTER_SMOOTH, 50);
             imagecopyresized($layout, $song_image, $x, $y, 0, 0, $song_width * $scale, 500 * $scale, $song_width, 500);
             $song_data[] = $chart->song_id;
@@ -438,11 +438,14 @@ class MapPoolController extends Controller
             imagecopyresized($layout, $battleImage, 900, -150 + $originalY, 0, 0, 48 * 3, 60 * 3, 48, 60);
         }
 
-        // imagefilter($layout, IMG_FILTER_SMOOTH, 50);
+        imagefilter($layout, IMG_FILTER_SMOOTH, 50);
 
-        $file = $file_name;
-        imagepng($layout, $file_name);
-        // return '<img src="/' . $file_name . '">';
+        // $file = $file_name;
+        // imagepng($layout, $file_name);
+        $file = $file_name . '.bak';
+        imagepng($layout, $file);
+        unlink($file_name);
+        rename($file, $file_name);
         //dd($song_data);
         return 1;
     }
@@ -555,11 +558,11 @@ class MapPoolController extends Controller
             //dd($song_sega_id);
             throw $e;
             // $songs = Song::pluck('imageName', 'id');
-            // $this->addImage($layout, $songs[rand(77, 1121)], $srcX, $srcY);
+            // $this->addSongImage($layout, $songs[rand(77, 1121)], $srcX, $srcY);
         }
     }
 
-    public function addImage($layout, $song, $chart, $srcX, $srcY, $text, $lock, $select, $item, $showPlayer) {
+    public function addSongImage($layout, $song, $chart, $srcX, $srcY, $text, $lock, $select, $item, $showPlayer) {
 
         $layout = imagecreatefrompng('song-layout.png');
         $layout= imagescale ( $layout, 355 , 500);
@@ -687,7 +690,7 @@ class MapPoolController extends Controller
             //dd($song_sega_id);
             throw $e;
             // $songs = Song::pluck('imageName', 'id');
-            // $this->addImage($layout, $songs[rand(77, 1121)], $srcX, $srcY);
+            // $this->addSongImage($layout, $songs[rand(77, 1121)], $srcX, $srcY);
         }
 
         // $file = 'test_song.png';
@@ -757,7 +760,7 @@ class MapPoolController extends Controller
         //     $song = Song::find($chart->song_id);
         //     $select = $item->is_selected ? 1 : 0;
         //     $lock = $item->is_banned ? 1 : 0;
-        //     $this->addImage($layout, $song, $chart, $x, 350, $song->short_name ?? $song->title, $lock, $select, $item, $showPlayer);
+        //     $this->addSongImage($layout, $song, $chart, $x, 350, $song->short_name ?? $song->title, $lock, $select, $item, $showPlayer);
         //     $song_data[] = $chart->song_id;
         //     $x+=350;
         // }
