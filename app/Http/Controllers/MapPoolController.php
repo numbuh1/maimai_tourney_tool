@@ -292,6 +292,27 @@ class MapPoolController extends Controller
         return view('pool.roulette', $data);
     }
 
+    public function showPool($poolId)
+    {
+        $pool = MapPool::find($poolId);
+        $items = MapPoolItem::where('map_pool_id', $poolId)->orderBy('order')->get();
+
+        $songs = Song::join('charts','charts.song_id','songs.id')
+                        ->whereNotNull('sega_song_id')
+                        ->groupBy('songs.id')
+                        ->pluck('songs.id');
+        $song_names = Song::pluck('title', 'id');
+
+        $players = Player::select('players.*')
+                        ->join('player_in_map_pool', 'player_in_map_pool.player_id', 'players.id')
+                        ->where('map_pool_id', $poolId)
+                        ->get();
+        $player_names = $players->pluck('name');
+    
+        $this->drawMapPool($items, 0.9, 350, 'background.png', 'test-pool-image.png', false, true, $player_names);
+        return '<img src="/test-pool-image.png">';
+    }
+
     public function show($poolId, $showPlayer = null)
     {
         $pool = MapPool::find($poolId);
@@ -362,10 +383,11 @@ class MapPoolController extends Controller
                 $scale += 0.005;
             }
             $check_padding = 1920 - ($song_width * $scale * count($items));
-            if($scale >= $max_scale || $scale <= $min_scale || $check_padding < $min_padding || $check_padding > $max_padding) {
+            if($scale >= $max_scale || $scale <= $min_scale || ($check_padding > 0 && $check_padding < $min_padding) || $check_padding > $max_padding) {
                 break;
             }
         };
+        // $scale = 0.5;
 
         $song_height *= $scale;
         if($scale_vertical)
@@ -589,7 +611,8 @@ class MapPoolController extends Controller
             $song->sega_song_id = substr($song->sega_song_id, 1, 5);
         }
         $song_sega_id = sprintf("%06d", $song->sega_song_id);
-        $song_file = 'img/song_image/UI_Jacket_' . $song_sega_id . '_s.png';
+        $song_file = 'img/song_image/UI_Jacket_' . $song_sega_id . '_S.png';
+
         try {
             if($select) {
                 // $selectBgImage = imagecreatefrompng('img/song_layout/select_background.png');
@@ -607,7 +630,7 @@ class MapPoolController extends Controller
             $typeImage = imagecreatefrompng('img/song_layout/type_' . $chart->type . '.png');
             // $levelBaseImage = imagecreatefrompng('img/song_layout/level_base.png');
             $levelBaseImage = imagecreatefrompng('img/song_layout/base_' . $chart->difficulty . '_lower.png');
-            $levelImage = imagecreatefrompng('img/song_layout/level_' . $chart->level . '.png');
+            //$levelImage = imagecreatefrompng('img/song_layout/level_' . $chart->level . '.png');
             $titleBaseImage = imagecreatefrompng('img/song_layout/title.png');
             $boardImage = imagecreatefrompng('img/song_layout/board.png');
 
@@ -655,7 +678,26 @@ class MapPoolController extends Controller
             imagecopyresized($layout, $boardImage, $srcX + 22, $srcY + 280, 0, 0, 270, 120, 916, 518);
             // imagecopyresized($layout, $levelBaseImage, $srcX + 180, $srcY + 220, 0, 0, 156, 92, 156, 92);
             imagecopyresized($layout, $levelBaseImage, $srcX + 152, $srcY + 185, 0, 0, 124, 76, 124, 76);
-            imagecopyresized($layout, $levelImage, $srcX + 204, $srcY + 180, 150, 0, 97, 90, 172, 160);
+            
+
+            //imagecopyresized($layout, $levelImage, $srcX + 204, $srcY + 180, 150, 0, 97, 90, 172, 160);
+            // Level (60x48)
+            $lvScale = 0.7;
+            $lvImage = imagecreatefrompng('img/song_layout/lv_' . $chart->difficulty . '.png');
+            $coorLv = [
+                'x' => 2,
+                'y' => 3
+            ];
+            imagecopyresized($layout, $lvImage, $srcX + 185, $srcY + 215, 48 * $coorLv['x'], 60 * $coorLv['y'], 48 * $lvScale, 60 * $lvScale, 48, 60);
+            $lvChar = str_split($chart->level, 1);
+            $currLvX = 40 * $lvScale * 0.8;
+            foreach ($lvChar as $char) {
+                $coorLv = $this->getLvCoor($char);
+                imagecopyresized($layout, $lvImage, $srcX + 185 + $currLvX, $srcY + 215, 48 * $coorLv['x'], 60 * $coorLv['y'], 48 * $lvScale, 60 * $lvScale, 48, 60);
+                $currLvX += 48 * $lvScale * 0.6;
+            }
+
+
             // imagecopyresized($layout, $titleBaseImage, $srcX, $srcY + 300, 0, 0, 316, 88, 300, 88);
 
             // dd(!$showPlayer);
@@ -791,5 +833,79 @@ class MapPoolController extends Controller
             $pool->delete();
         }
         return 1;
+    }
+
+    public function getLvCoor($char)
+    {
+        switch ($char) {
+            case '0':
+                $x = 0;
+                $y = 0;
+                break;
+            case '1':
+                $x = 1;
+                $y = 0;
+                break;
+            case '2':
+                $x = 2;
+                $y = 0;
+                break;
+            case '3':
+                $x = 3;
+                $y = 0;
+                break;
+            case '4':
+                $x = 0;
+                $y = 1;
+                break;
+            case '5':
+                $x = 1;
+                $y = 1;
+                break;
+            case '6':
+                $x = 2;
+                $y = 1;
+                break;
+            case '7':
+                $x = 3;
+                $y = 1;
+                break;
+            case '8':
+                $x = 0;
+                $y = 2;
+                break;
+            case '9':
+                $x = 1;
+                $y = 2;
+                break;
+            case '+':
+                $x = 2;
+                $y = 2;
+                break;
+            case '-':
+                $x = 3;
+                $y = 2;
+                break;            
+            case ',':
+                $x = 0;
+                $y = 3;
+                break;
+            case '.':
+                $x = 1;
+                $y = 3;
+                break;
+            case 'lv':
+                $x = 2;
+                $y = 3;
+                break;
+            default:
+                $x = -1;
+                $y = -1;
+                break;
+        }
+        return [
+            'x' => $x,
+            'y' => $y
+        ];
     }
 }

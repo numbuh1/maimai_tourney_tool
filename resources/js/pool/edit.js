@@ -85,7 +85,7 @@ $(document).on('click', '#btnShowSongs', function() {
                 let kind = charts[i].type == 'dx' ? 'dx' : 'standard';
                 // let sega_song_id = charts[i].sega_song_id ? charts[i].sega_song_id.toString() : '0';
                 // sega_song_id = sega_song_id.substring(sega_song_id.length - 4).padStart(6, '0');
-                let html =  '<div class="col-md-2 col-6">' +
+                let html =  '<div class="col-md-2 col-sm-3 col-6">' +
                                 '<a href="#" class="song-select text-dark" data-id="' + charts[i].chart_id + '"><div class="card" style="width: 8rem;">' +
                                     '<img class="card-img-top chart-thumbnail chart-' + charts[i].difficulty + '" src="https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/' + charts[i].imageName + '" alt="Card image cap">' +
                                     // '<img class="card-img-top chart-thumbnail chart-' + charts[i].difficulty + '" src="/img/song_image/UI_Jacket_' + sega_song_id + '_s.png" alt="Card image cap">' +                                    
@@ -135,7 +135,7 @@ $(document).on('click', '#btnRandomSongs', function() {
             $('#song-pane').html('');
             for (var i = 0; i < charts.length; i++) {
                 let kind = charts[i].type == 'dx' ? 'dx' : 'standard';
-                let html =  '<div class="col-md-2 col-6">' +
+                let html =  '<div class="col-md-2 col-sm-3 col-6">' +
                                 '<a href="#" class="song-select text-dark" data-id="' + charts[i].chart_id + '"><div class="card" style="width: 8rem;">' +
                                     '<img class="card-img-top chart-thumbnail chart-' + charts[i].difficulty + '" src="https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/' + charts[i].imageName + '" alt="Card image cap">' +
                                     '<img src="https://maimaidx-eng.com/maimai-mobile/img/music_' + kind + '.png" class="music_kind_icon ">' +
@@ -187,6 +187,7 @@ $(document).on('show.bs.modal', '.modal', function() {
 });
 
 $(document).on('click', '#btnConfirmSelectSong', function() {
+    $('#btnConfirmSelectSong').prop('disabled', true);
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -204,6 +205,7 @@ $(document).on('click', '#btnConfirmSelectSong', function() {
         complete: function(data) {
             $('#tblPool').DataTable().ajax.reload();
             $('#confirmSelectSongModal').modal('hide');
+            $('#btnConfirmSelectSong').prop('disabled', false);
         },
     });
 });
@@ -252,6 +254,7 @@ $(document).on('click', '#btnRandomList, #btnLockPool', function(event) {
             return;
         }
     }
+    $(this).prop('disabled', true);
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -262,11 +265,16 @@ $(document).on('click', '#btnRandomList, #btnLockPool', function(event) {
         url: $(this).data("url"),
         dataType: 'json',
         complete: function(data) {
+            // if($(this).data('type') == 'lock') {
+            //     location.reload();
+            // } else {
+            //     $('#tblPool').DataTable().ajax.reload();
+            // }            
             if($(this).data('type') == 'lock') {
                 location.reload();
             } else {
-                $('#tblPool').DataTable().ajax.reload();
-            }            
+                $(this).prop('disabled', false);
+            }
         },
     });
 });

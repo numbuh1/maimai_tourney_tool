@@ -45,6 +45,7 @@ Route::get('/pools/add', [MapPoolController::class, 'add'])->name('pool.add');
 Route::get('/pools/{id}/edit', [MapPoolController::class, 'edit'])->name('pool.edit');
 Route::get('/pools/{id}/show', [MapPoolController::class, 'show'])->name('pool.show');
 Route::get('/pools/{id}/showLayout/{showPlayer}', [MapPoolController::class, 'showLayout'])->name('pool.showLayout');
+Route::get('/pools/{id}/showPool', [MapPoolController::class, 'showPool'])->name('pool.showPool');
 Route::post('/pools/{id}/delete', [MapPoolController::class, 'delete'])->name('pool.delete');
 
 Route::get('/pools/store', [MapPoolController::class, 'store'])->name('pool.store');
