@@ -188,7 +188,7 @@ class MapPoolController extends Controller
         $item->order = $count + 1;
 
         $item->save();
-        $this->show($input['mapPoolId']);
+        // $this->show($input['mapPoolId']);
 
         return 1;
     }
@@ -208,7 +208,7 @@ class MapPoolController extends Controller
         $item = MapPoolItem::find($id);
         $item->is_selected = $select;
         $item->save();
-        $this->show($id);
+        // $this->show($id);
 
         return 1;
     }
@@ -229,7 +229,7 @@ class MapPoolController extends Controller
     {
         $item = MapPoolItem::find($id);
         $item->delete();
-        $this->show($item->map_pool_id);
+        // $this->show($item->map_pool_id);
 
         return 1;
     }
@@ -242,7 +242,7 @@ class MapPoolController extends Controller
             $item->order = $key + 1;
             $item->save();
         }
-        $this->show($poolId);
+        // $this->show($poolId);
 
         return 1;
     }
@@ -253,7 +253,7 @@ class MapPoolController extends Controller
         $item = MapPool::find($poolId);
         $item->is_locked = 1;
         $item->save();
-        $this->show($poolId);
+        // $this->show($poolId);
 
         return 1;
     }
