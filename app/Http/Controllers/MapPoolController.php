@@ -640,7 +640,7 @@ class MapPoolController extends Controller
                 imagefilter($typeImage, IMG_FILTER_GRAYSCALE);
                 // imagefilter($levelBaseImage, IMG_FILTER_GRAYSCALE);
                 imagefilter($levelBaseImage, IMG_FILTER_GRAYSCALE);
-                imagefilter($levelImage, IMG_FILTER_GRAYSCALE);
+                // imagefilter($levelImage, IMG_FILTER_GRAYSCALE);
                 imagefilter($titleBaseImage, IMG_FILTER_GRAYSCALE);
             } else {
                 // imagefilter($titleBaseImage, IMG_FILTER_BRIGHTNESS, -50);
@@ -684,6 +684,11 @@ class MapPoolController extends Controller
             // Level (60x48)
             $lvScale = 0.7;
             $lvImage = imagecreatefrompng('img/song_layout/lv_' . $chart->difficulty . '.png');
+
+            if($lock) {                
+                imagefilter($lvImage, IMG_FILTER_GRAYSCALE);
+            }
+            
             $coorLv = [
                 'x' => 2,
                 'y' => 3
