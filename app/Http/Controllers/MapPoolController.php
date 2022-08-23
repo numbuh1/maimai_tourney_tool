@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tournament;
 use App\Models\MapPool;
 use App\Models\MapPoolItem;
 use App\Models\Song;
@@ -17,6 +18,7 @@ class MapPoolController extends Controller
     public function index($tourney_id)
     {
         $pools = MapPool::All();
+        $tourney = Tournament::find($tourney_id);
         foreach ($pools as $key => $pool) {
             $player_count = PlayersInMapPools::where('map_pool_id', $pool->id)->count();
             if($player_count <= 2 && $pool->is_locked) {
@@ -27,6 +29,7 @@ class MapPoolController extends Controller
         }
     	$data = [
     		'pools' => $pools,
+            'tourney' => $tourney
     	];
     	return view('pool.index', $data);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Player;
+use App\Models\Tournament;
 
 class PlayerController extends Controller
 {
@@ -11,9 +12,11 @@ class PlayerController extends Controller
     public function index($tourney_id)
     {
     	$players = Player::where('tourney_id', $tourney_id)->get();
+        $tourney = Tournament::find($tourney_id);
 
     	$data = [
     		'players' => $players,
+            'tourney' => $tourney
     	];
 
     	return view('player.index', $data);

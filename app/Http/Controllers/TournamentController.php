@@ -21,8 +21,12 @@ class TournamentController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        if($input['id']) {
+            $tourney = Tournament::find($input['id']);
+        } else {
+            $tourney = new Tournament(); 
+        }
 
-        $tourney = new Tournament(); 
         $tourney->name = $input['name'];
         $tourney->save();
 

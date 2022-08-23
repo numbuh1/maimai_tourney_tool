@@ -3,7 +3,7 @@
 @section('title', 'Players')
 
 @section('content_header')
-    <h1>Players</h1>
+    <h1>{{ $tourney->name }}</h1>
 @stop
 
 @section('content')
