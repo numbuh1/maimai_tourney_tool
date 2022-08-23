@@ -25,7 +25,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('pool.edit', ['id' => $pool->id]) }}" class="btn btn-sm btn-secondary">Edit</a>
+                        <a href="{{ route('pool.edit', ['id' => $pool->id, 'tourney_id' => request()->route('tourney_id')]) }}" class="btn btn-sm btn-secondary">Edit</a>
                         <a href="#" class="btn btn-sm btn-danger btnDeletePool" data-name="{{ $pool->name }}" data-id="{{ $pool->id }}" data-url="{{ route('pool.delete', ['id' => $pool->id]) }}">Delete</a>
                     </td>
                 </tr>

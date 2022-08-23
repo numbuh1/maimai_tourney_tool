@@ -8,9 +8,9 @@ use App\Models\Player;
 class PlayerController extends Controller
 {
     //
-    public function index()
+    public function index($tourney_id)
     {
-    	$players = Player::all();
+    	$players = Player::where('tourney_id', $tourney_id)->get();
 
     	$data = [
     		'players' => $players,
@@ -19,7 +19,7 @@ class PlayerController extends Controller
     	return view('player.index', $data);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $tourney_id)
     {
     	$input = $request->all();
     	if($input['id']) {
@@ -33,6 +33,7 @@ class PlayerController extends Controller
         if(isset($input['is_eliminated']) && $input['is_eliminated'] != 'false')
             $is_eliminated = 1;
     	$player->is_eliminated = $is_eliminated;
+        $player->tourney_id = $tourney_id;
     	$player->save();
 
     	return 1;

@@ -14,7 +14,7 @@ use App\Models\Score;
 class MapPoolController extends Controller
 {
     // List Map Pool
-    public function index()
+    public function index($tourney_id)
     {
         $pools = MapPool::All();
         foreach ($pools as $key => $pool) {
@@ -32,10 +32,11 @@ class MapPoolController extends Controller
     }
 
     // Add Map Pool
-    public function add()
+    public function add($tourney_id)
     {
     	$map_pool = new MapPool();
         $map_pool->name = 'New Map Pool';
+        $map_pool->tourney_id = $tourney_id;
         $map_pool->save();
         $pool_players = PlayersInMapPools::where('map_pool_id', $map_pool->id)->pluck('player_id')->toArray();
         $players = Player::where('is_eliminated', 0)->orWhereIn('id', $pool_players)->get();
@@ -117,7 +118,7 @@ class MapPoolController extends Controller
     }
 
     // Update Map Pool
-    public function update(Request $request, $id)
+    public function update(Request $request, $tourney_id, $id)
     {
         $input = $request->all();
         $key = $input['key'] ?? '';
@@ -171,7 +172,7 @@ class MapPoolController extends Controller
     }
 
     // Store Map Pool Item
-    public function storeItem(Request $request)
+    public function storeItem(Request $request, $tourney_id)
     {
         $input = $request->all();
 

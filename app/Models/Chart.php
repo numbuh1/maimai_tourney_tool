@@ -35,6 +35,7 @@ class Chart extends Model
                     'songs.sega_song_id'
     			)
     			->leftJoin('charts', 'charts.song_id', 'songs.id')
+                ->whereNull('songs.isLocked')
     			->whereNotNull('charts.level');
 
     	if($category) {

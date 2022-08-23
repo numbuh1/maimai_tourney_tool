@@ -5,6 +5,7 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\MapPoolController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,9 +41,9 @@ Route::post('/songs/random', [SongController::class, 'random'])->name('song.rand
 Route::post('/chart/{id}', [ChartController::class, 'detail'])->name('chart.detail');
 
 // MAP POOLS
-Route::get('/pools', [MapPoolController::class, 'index'])->name('pool.index');
-Route::get('/pools/add', [MapPoolController::class, 'add'])->name('pool.add');
-Route::get('/pools/{id}/edit', [MapPoolController::class, 'edit'])->name('pool.edit');
+Route::get('/tournament/{tourney_id}/pools', [MapPoolController::class, 'index'])->name('pool.index');
+Route::get('/tournament/{tourney_id}/pools/add', [MapPoolController::class, 'add'])->name('pool.add');
+Route::get('/tournament/{tourney_id}/pools/{id}/edit', [MapPoolController::class, 'edit'])->name('pool.edit');
 Route::get('/pools/{id}/show', [MapPoolController::class, 'show'])->name('pool.show');
 Route::get('/pools/{id}/showLayout/{showPlayer}', [MapPoolController::class, 'showLayout'])->name('pool.showLayout');
 Route::get('/pools/{id}/showPool', [MapPoolController::class, 'showPool'])->name('pool.showPool');
@@ -61,17 +62,22 @@ Route::post('/pool-item/{id}/ban/{ban}', [MapPoolController::class, 'banItem'])-
 Route::post('/pool-item/{id}/select/{select}', [MapPoolController::class, 'selectItem'])->name('pool.item.select');
 Route::post('/pool-item/{id}/remove', [MapPoolController::class, 'removeItem'])->name('pool.item.remove');
 Route::get('/pools-item/{id}/roulette', [MapPoolController::class, 'roulette'])->name('pool.item.roulette');
-//Route::get('/song/{id}', [SongController::class, 'detail'])->name('song.detail');
 
 // MAP POOL SCORES
 Route::post('/pools/{id}/scores', [ScoreController::class, 'getScores'])->name('pool.scores');
 Route::get('/pools/{id}/showScores', [ScoreController::class, 'showScores'])->name('pool.showScores');
-Route::get('/score/edit/{item_id}/{player_id}', [ScoreController::class, 'edit'])->name('score.edit');
+Route::get('/tournament/{tourney_id}/score/edit/{item_id}/{player_id}', [ScoreController::class, 'edit'])->name('score.edit');
 Route::post('/score/store/{item_id}/{player_id}', [ScoreController::class, 'store'])->name('score.store');
 Route::post('/score/update/{item_id}/{player_id}/{score_id}', [ScoreController::class, 'update'])->name('score.update');
 Route::post('/score/refresh', [ScoreController::class, 'refresh'])->name('score.refresh');
 
 // PLAYERS
-Route::get('/players', [PlayerController::class, 'index'])->name('player.index');
-Route::post('/players/store', [PlayerController::class, 'store'])->name('player.store');
+Route::get('/tournament/{tourney_id}/players', [PlayerController::class, 'index'])->name('player.index');
+Route::post('/tournament/{tourney_id}/players/store', [PlayerController::class, 'store'])->name('player.store');
 Route::post('/players/{id}/delete', [PlayerController::class, 'delete'])->name('player.delete');
+
+// TOURNAMENTS
+Route::get('/tournaments', [TournamentController::class, 'index'])->name('tournament.index');
+Route::post('/tournament/store', [TournamentController::class, 'store'])->name('tournament.store');
+Route::post('/tournament/{id}/delete', [TournamentController::class, 'delete'])->name('tournament.delete');
+Route::get('/tournament/{id}', [TournamentController::class, 'dashboard'])->name('tournament.dashboard');

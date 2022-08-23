@@ -40,7 +40,7 @@ class ImportCharts extends Command
      */
     public function handle()
     {
-        $filename = database_path() . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'data-uni.json';
+        $filename = database_path() . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'data-uni-plus.json';
 
         $json = File::get($filename);
         $data = json_decode($json);
@@ -71,7 +71,8 @@ class ImportCharts extends Command
 
             $charts = $song->sheets;
             foreach ($charts as $key => $chart) {
-                if($chart->type != 'utage' && $chart->regions->intl) {
+                $chart->version = $chart->version ?? '';
+                if($chart->type != 'utage' && ($chart->regions->intl || $chart->version == "UNiVERSE PLUS")) {
                     $currChart = Chart::where('song_id', $currSong->id)->where('type', $chart->type)->where('difficulty', $chart->difficulty)->first();
                     if(!$currChart) {
                         $currChart = new Chart();

@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-primary" id="btnSubmitPlayer" data-url="{{ route('player.store') }}">Submit</a>
+                <a href="#" class="btn btn-primary" id="btnSubmitPlayer" data-url="{{ route('player.store', ['tourney_id' => request()->route('tourney_id')]) }}">Submit</a>
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
             </div>
         </div>

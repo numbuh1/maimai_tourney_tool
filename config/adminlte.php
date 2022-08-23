@@ -85,7 +85,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -146,9 +146,9 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
-    'sidebar_collapse_remember' => false,
+    'sidebar_collapse_remember' => true,
     'sidebar_collapse_remember_no_transition' => true,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'tournaments',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -248,15 +248,24 @@ return [
         ],
         ['header' => 'Tourney Settings'],
         [
-            'text' => 'Map Pools',
-            'url'  => 'pools',
-            'icon' => 'fas fa-fw fa-file',
+            'key'  => 'tournaments',
+            'text' => 'Tournaments',
+            'url'  => 'tournaments',
+            'icon' => 'fas fa-fw fa-trophy',
+            'active' => ['tournament']
         ],
-        [
-            'text' => 'Players',
-            'url'  => 'players',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+        // [
+        //     'key'  => 'pools',
+        //     'text' => 'Map Pools',
+        //     'url'  => 'pools',
+        //     'icon' => 'fas fa-fw fa-file',
+        // ],
+        // [
+        //     'key'  => 'players',
+        //     'text' => 'Players',
+        //     'url'  => 'players',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
         ['header' => 'Config Settings'],
         [
             'text' => 'Songs',

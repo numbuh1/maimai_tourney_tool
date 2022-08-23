@@ -43,3 +43,7 @@ mix.js('resources/js/player/index.js', 'public/js/player')
     .webpackConfig({ devtool: 'source-map' })
     .sourceMaps()
     .version();
+mix.js('resources/js/tournament/index.js', 'public/js/tournament')
+    .webpackConfig({ devtool: 'source-map' })
+    .sourceMaps()
+    .version();
